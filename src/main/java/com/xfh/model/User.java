@@ -1,8 +1,10 @@
 package com.xfh.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +21,11 @@ import javax.persistence.Table;
  * 功能：用户实体类，对应数据库中的user表
  *
  */
+@SuppressWarnings("serial")
 @Entity
 //user:数据库中的user表；donate:数据库名
 @Table(name="user",schema="donation_platform")
-public class User {
+public class User implements Serializable{
 	private Integer id;
 	private String user_Name;  //用户名
 	private String user_Pass;  //密码
@@ -129,7 +132,4 @@ public class User {
 		this.proById = proById;
 	}
 	
-	
-	
-
 }

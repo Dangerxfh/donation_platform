@@ -4,7 +4,7 @@ import com.xfh.model.User;
 
 public interface UserService {
 	//登陆
-	public boolean UserLogin(User user);
+	public User UserLogin(User user);
 	
 	//注册
 	public boolean UserRegister(User user) throws Exception;

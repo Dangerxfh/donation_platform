@@ -4,12 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.xfh.dao.IBaseDao;
 import com.xfh.model.User;
@@ -22,15 +18,13 @@ public class UserServiceImpl implements UserService {
 	
 	//登陆
 	@Override
-	public boolean UserLogin(User user) {
+	public User UserLogin(User user) {
 		Map<String,Object> params=new HashMap<String, Object>();
 		params.put("user_Name",user.getUser_Name());
 		params.put("user_Pass",user.getUser_Pass());
 		
 		List<User> users=userDao.getByParams(1,User.class,params);
-		if(users.isEmpty())
-			return false;
-		return true;
+		return users.get(0);
 	}
 
 	//注册

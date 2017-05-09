@@ -25,9 +25,9 @@ public class UserController {
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public String login(@ModelAttribute User user,HttpSession session,ModelMap map){
 		String url=(String) session.getAttribute("url");
-		System.out.println(url);
-    	if(userService.UserLogin(user)==true){
-    		session.setAttribute("user",user);
+		User cur_user=userService.UserLogin(user);
+    	if(cur_user!=null){
+    		session.setAttribute("user",cur_user);
     		if(url==null)
     			return "forward:/beforeindex";
     		return "redirect:./"+url;

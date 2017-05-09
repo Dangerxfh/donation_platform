@@ -3,6 +3,8 @@ package com.xfh.model;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+
 /**
  * 
  * @author 次此处写自己的姓名
  * 功能：金额实体类，与数据库中money表对应
  *
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name="do_record",schema="donation_platform")
 public class Do_Record implements Serializable {
@@ -55,7 +60,7 @@ public class Do_Record implements Serializable {
 		this.do_Time = do_Time;
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id",referencedColumnName="id")
 	public User getUserByUserId() {
 		return userByUserId;
@@ -64,7 +69,7 @@ public class Do_Record implements Serializable {
 		this.userByUserId = userByUserId;
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="pro_id",referencedColumnName="id")
 	public Project getProByProId() {
 		return proByProId;
