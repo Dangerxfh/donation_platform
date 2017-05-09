@@ -1,0 +1,87 @@
+@CHARSET "UTF-8";
+body{
+	padding-top:70px;
+	font-family:"微软雅黑",-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+}
+.text-a{
+	color: black;
+}
+.text-a:hover{
+    text-decoration:none;
+	color: #35b306;
+}
+.text-green{
+	color: #438513;
+	
+}
+.badge{
+	background: #35b306;
+}
+.fixedimg{
+	width: 220px;
+	height: 124px;
+}
+.media-object{
+	width: 100%;
+	height: 100%;
+}
+/*
+ * 头部导航
+ */
+
+.navbar-default{
+	background-color: white;
+	height: 60px;
+	
+}
+.navbar-default .navbar-header a,.navbar-default .navbar-header a:hover{
+	color: #ea6f5a;
+	font-size:23px;
+	font-weight:bold;
+	padding: 20px 40px;
+}
+.navbar-default .navbar-nav li a{
+	color: black;
+	font-size:18px;
+	padding: 20px 15px;
+}
+.navbar-default .navbar-nav li a:hover{
+	color: #ea6f5a;
+}
+.navbar-default form{
+	padding:7px 40px;
+}
+.navbar-right{
+	padding: 20px 15px;
+	font-size:18px;
+	margin-right: 0px;
+}
+.navbar-right a{
+	text-decoration: none;
+}
+.text-red{
+	color: red;
+}
+/* 底部 */
+footer{
+	background: #f4f4f4;
+    border-top: 1px solid #e1e1e1;
+    margin-top: 60px;
+    padding: 25px 0;
+	
+}
+.layout{
+	padding:0px 100px;
+}
+.partner .hd{ border-bottom:1px solid #e1e1e1; padding-bottom:10px;}
+.partner .bd{ border-top:1px solid #fff; padding:0;}
+.style123{
+	
+	padding-top:10px;
+	padding-bottom:10px;
+	line-height:20px;
+	color: #222222; 
+	font-family: "微软雅黑","黑体";
+	font-size: 15px; 
+	font-weight: normal;
+

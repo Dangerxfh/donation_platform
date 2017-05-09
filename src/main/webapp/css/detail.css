@@ -1,0 +1,152 @@
+@CHARSET "UTF-8";
+  * {
+    padding: 0;
+    margin: 0;
+}
+.container{
+	margin-top:40px;
+	margin-bottom: 40px;
+}
+.row,.col-xs-6{
+	padding: 0px;
+	margin-top: 0px;	
+	margin-bottom: 0px;	
+}
+.breadcrumb{
+	margin: 0px;
+	background: white;
+}
+.breadcrumb a{
+	color: black;
+	text-decoration: none;
+} 
+.detailrow{	
+	border-top:3px solid #35b306;
+}
+.detailrow .col-xs-6>img{
+	padding:0px;
+	width: 100%;
+	height: 280px;
+	border: 1px solid #dadada;	
+}
+.real-icon{
+	background: url(../img/real-icon.png) no-repeat;
+    position: absolute;
+    display: inline-block;
+    display: inline;
+    zoom: 1;
+    width: 49px;
+    height: 43px;
+    top: -8px;
+    right: 0px;
+}
+.detailinfo{
+	height: 280px;
+	padding:20px 20px 0px 20px;
+	border: 1px solid #dadada;	
+}
+.detailinfo div{
+	padding: 5px;
+}
+.detailinfo .divider{
+	margin: 20px 0px;
+}
+.detailinfo span{
+	margin: 0px 5px 0px 5px;
+}
+.detailinfo p{
+	width: 220px;
+	float: left;
+    height: 25px;
+}
+.detailinfo input{
+	width: 80px;
+	margin-right: 10px;
+}
+.detailinfo select{
+	height:26px;
+	margin-right: 10px;
+}
+.detailinfo p>span{
+	padding: 0px 10px;
+}
+.doinfo{
+	width:100%; 
+}
+.brow{
+	margin-top: 60px;
+}
+#myTab li a{
+	width: 100px;
+	height: 40px;
+	border-radius:0px;
+	margin: 0px;
+	border-left:none;
+	border-right: none;
+	color: black;
+}
+#myTab li{
+	border-top:1px solid #dadada;
+	border-left:1px solid #dadada;	
+	padding: 0px;	
+}
+#myTab li:last-child{
+	border-right:1px solid #dadada;	
+}
+#myTab li.active{
+	border-top:3px solid #35b306; 
+}
+.col-xs-7{
+	padding-right: 20px;
+	padding-left: 0px;
+}
+.col-xs-5{
+	padding: 0px;
+	padding-left: 30px;
+}
+.rightinfo{
+	width: 100%;
+	padding:30px;
+	border:1px solid #dadada;
+	background-color: #f5f5f5;
+}
+.tab-pane{
+	padding: 20px;
+	height: 400px;
+	border:1px solid #dadada;
+	border-top: none; 
+}
+.gundong{
+	margin-top: 20px;
+}
+.gundong .title{
+	padding:10px;
+	border-bottom: 1px solid #e9e9e9;
+	margin-bottom: 30px;
+}
+.gundongtitle{
+    padding:10px;
+	border-bottom: 2px solid #579f23;
+}
+.gundongtitle:hover{
+	color: #579f23;
+}
+#box {
+	border: 1px solid #dadada;	
+    width: 100%;
+    height: 200px;
+    overflow: hidden; /*  这个一定要加，超出的内容部分要隐藏，免得撑高中间部分 */
+}
+.list-group{
+	margin: 0px;
+}
+#cont2 li span,#cont1 li span{
+	margin: 15px;
+}
+.list-group-item{
+border:none; 
+}
+#box .money{
+	color: red;
+	font-size: 13px;
+}

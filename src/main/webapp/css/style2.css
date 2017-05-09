@@ -1,0 +1,42 @@
+body{
+
+}
+.rw-wrapper{
+	font-family: 'Î¢ÈíÑÅºÚ'.'ºÚÌå';
+	margin-left: 70px;
+	text-align: center;
+	
+}
+
+.rw-words{
+	font-size:150%;
+	font-weight: normal;
+	color: #ea6f5a;
+	display: inline;
+	text-indent: 10px;
+}
+.rw-words-1 span{
+	position: absolute;
+	opacity: 0;
+	overflow: hidden;
+	color: #ea6f5a;
+	animation: rotateWord 7s linear infinite 0s;
+}
+.rw-words-1 span:nth-child(2) { 
+    -webkit-animation-delay: 3s; 
+	-moz-animation-delay: 3s; 
+	-o-animation-delay: 3s; 
+	-ms-animation-delay: 3s; 
+	animation-delay: 3s; 
+	color: #ea6f5a;
+}
+
+@keyframes rotateWord {
+    0% { opacity: 0; }
+    5% { opacity: 0; transform: translateY(-30px); }
+	10% { opacity: 1; transform: translateY(0px);}
+    17% { opacity: 1; transform: translateY(0px); }
+	20% { opacity: 0; transform: translateY(30px); }
+	80% { opacity: 0; }
+    100% { opacity: 0; }
+}

@@ -1,0 +1,109 @@
+.slide-tool{
+    position: fixed;
+    bottom: 95px;
+    right: 40px;
+    z-index:9;
+  
+}
+.slide-tool>ul{
+    list-style: none;
+}
+#btns{
+    margin-top:0px;
+      background-color: white;
+}
+#btns>li{
+    border: 1px solid #dcdcdc;
+    display: block;
+    line-height: 50px;
+}
+#btns>li>a:hover,#btns>li>a:focus{
+    background-color: #f8f8f8;
+    text-decoration: none;
+    color: #000000;
+}
+#btns>li:first-child{
+    border-bottom: none;
+}
+.function-button{
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    display: block;
+    color: #000000;
+}
+.function-button i{
+    padding-top:16px;
+    font-size:20px;
+    display: block;
+}
+/*popoverÑùÊ½*/
+.social{
+    padding:0px;
+    margin: -10px -15px;
+}
+.social li{
+    list-style: none;
+    padding: 6px 15px;
+}
+.social li:last-child{
+    margin-bottom:0px;
+}
+.social li a{
+    color: black;
+}
+.social>li:hover{
+    background-color: #dfdfdf;
+}
+.social>li:hover a{
+    text-decoration: none;
+    color: black;
+}
+.social span{
+    margin-left: 10px;
+}
+.social-icon-sprite {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    width: 18px;
+    height: 18px;
+    background: url(../img/slide-tool.png) no-repeat;
+}
+.social-icon-weibo {
+    background-position: 0 0;
+}
+.social-icon-weixin {
+    background-position: -20px 0;
+}
+.social-icon-picture {
+    background-position: -40px 0;
+}
+.social-icon-zone {
+    background-position: -60px 0;
+}
+.social-icon-twitter {
+    background-position: -80px 0;
+}
+.social-icon-facebook {
+    background-position: -100px 0;
+}
+.social-icon-google {
+    background-position: -120px 0;
+}
+.social-icon-douban {
+    background-position: -140px 0;
+}
+.social-icon-weibov {
+    background-position: -160px 0;
+}
+.social-icon-qq {
+    background-position: -180px 0;
+}
+.social-icon-index {
+    background-position: -200px 0;
+}
+.social-icon-knight {
+    background-position: -220px 0;
+}

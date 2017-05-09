@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+   
+    <context:component-scan base-package="com.xfh.controller.user"/>
+    
+    <bean id="view" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+    	<property name="prefix" value="/"></property>
+    	<property name="suffix" value=".jsp"></property>
+    </bean>
+    
+  <!-- 
+    	 用于访问静态资源(js、css等)，因为如果是外部的js文件，springmvc一样会认为是一个请求uri,
+      	加入此handler，会对请求进行筛选，如果是没有经过映射的请求，就将该请求交给Web服务器默认的Servlet处理，如果不是静态资源的请求，
+		才由DispatcherServlet继续处理。	
+     -->
+     <mvc:default-servlet-handler/>
+    <!-- 注解驱动 -->
+   	<mvc:annotation-driven/>
+   	</beans>
