@@ -60,7 +60,7 @@ public class Do_Record implements Serializable {
 		this.do_Time = do_Time;
 	}
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="user_id",referencedColumnName="id")
 	public User getUserByUserId() {
 		return userByUserId;
@@ -69,7 +69,7 @@ public class Do_Record implements Serializable {
 		this.userByUserId = userByUserId;
 	}
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="pro_id",referencedColumnName="id")
 	public Project getProByProId() {
 		return proByProId;
