@@ -31,10 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div class="col-xs-11 col-xs-offset-1">
 	    	<div class="col-xs-3"  >
 	            <ul class="nav nav-tabs nav-stacked text-center" id="sidebarMenu">
-	                <li id="li1" class="active"><a href="<%=basePath%>user/detail">我献出的爱心</a></li>
-	                <li id="li2"><a href="<%=basePath%>user/detail?type=goods">我捐出的物资</a></li>
-	                <li id="li3"><a href="<%=basePath%>user/detail?type=money">我的捐款记录</a></li>
-	            	<li id="li4"><a href="<%=basePath%>user/detail?type=myinfo">修改个人信息</a></li>
+	                <li id="li1"><a href="<%=basePath%>user/detail/project">我献出的爱心</a></li>
+	                <li id="li3" class="active"><a href="<%=basePath%>user/detail/money">我的捐款记录</a></li>
+	            	<li id="li4"><a href="<%=basePath%>user/detail/myinfo">修改个人信息</a></li>
 	            </ul>
 	        </div>
 	        <div class="col-xs-9">
@@ -43,22 +42,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="title">
 							 <span class="listtitle h2">
 							 	我的捐款记录
-							 	<span class="badge">共${my_moneysnum }元</span>
+							 	<span class="badge">共${requestScope.person_money }元</span>
 							 </span>	
 						</div>
 					</div>
 	        	</div>
 	        	<div class="row col-xs-8 col-xs-offset-2">
-	        	<c:forEach items="${my_moneys}" var="money">
+	        	<c:forEach items="${requestScope.person_record}" begin="0" end="9" var="record">
 	        		<div class="proj_content">   
 		        		 <div class="content">    
 			        		 <i class="greenspot beBig"></i>  
 			        		 <!-- 项目名 -->      
-			        		 <p class="name" style="margin-bottom:0;">参与的项目名称：<span>${money.pro_Title }</span></p>
+			        		 <p class="name" style="margin-bottom:0;">参与的项目名称：<span>${record.proByProId.pro_Title}</span></p>
 			        		 <!-- 捐款钱数 -->
-			        		 <p class="text-muted">该次捐款钱数：<span class="text-red">${money.mon_Number }</span> 元</p>
+			        		 <p class="text-muted">该次捐款钱数：<span class="text-red">${record.mon_Number }</span> 元</p>
 			        		  <!-- 捐款时间 -->       
-			        		 <p class="text-muted">${money.do_Time }</p>  
+			        		 <p class="text-muted">${record.do_Time }</p>  
 		        		 </div>  
 	        		 </div>
 	        	</c:forEach>	        	

@@ -6,14 +6,12 @@ import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.xfh.util.HibernateUtil;
 
 /**
  * Created by Fog on 2017/4/10.
@@ -90,6 +88,18 @@ public class IBaseDaoImpl<T> implements IBaseDao<T>{
 		Criteria criteria=getSession().createCriteria(t);
 		tList=criteria.list();
 		return tList;
+	}
+
+	//多对多查询
+	@Override
+	public List<T> getWithMany(Class t, String table,Object value) {
+		List<T> tlist = getSession().createCriteria(t)
+                //必需创建一个别名，roles为user中包 含的role 的list.
+                .createAlias(table,table)
+                //roleId为传进来进行查询的角色ID
+                .add(Restrictions.eq(table+".id",value))
+                .list(); 
+		return tlist;
 	}
 
 }

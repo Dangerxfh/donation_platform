@@ -10,16 +10,18 @@
     <context:component-scan base-package="com.xfh.controller.user"/>
     
     <bean id="view" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
-    	<property name="prefix" value="/"></property>
+    	<property name="prefix" value="/WEB-INF/jsp/"></property>
     	<property name="suffix" value=".jsp"></property>
     </bean>
-    
-  <!-- 
-    	 用于访问静态资源(js、css等)，因为如果是外部的js文件，springmvc一样会认为是一个请求uri,
-      	加入此handler，会对请求进行筛选，如果是没有经过映射的请求，就将该请求交给Web服务器默认的Servlet处理，如果不是静态资源的请求，
-		才由DispatcherServlet继续处理。	
-     -->
-     <mvc:default-servlet-handler/>
+  
+    <mvc:default-servlet-handler/>
     <!-- 注解驱动 -->
    	<mvc:annotation-driven/>
+   	
+   	<mvc:interceptors>
+   		<mvc:interceptor>
+   			<mvc:mapping path="/user/**"/>
+   			<bean class="com.xfh.interceptor.LoginInterceptor"></bean>
+   		</mvc:interceptor>
+   	</mvc:interceptors>
    	</beans>

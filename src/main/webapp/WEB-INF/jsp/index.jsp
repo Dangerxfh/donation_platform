@@ -75,10 +75,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- 信息列表 -->
 						<c:forEach items="${projects}"  begin="0" end="5" var="project">
 						<div class="media">
-							<h4 class="media-heading h3"> <a class="text-a" href="project/detail?pro_id=${project.id }"> ${project.pro_Title}</a></h4>
+							<h4 class="media-heading h3"> <a class="text-a" href="project/detail/${project.id }"> ${project.pro_Title}</a></h4>
 							<!--活动标题  -->
 							<!-- 图片 -->
-				        	<a class="pull-left  fixedimg" href="project/detail?pro_id=${project.id }">
+				        	<a class="pull-left  fixedimg" href="project/detail/${project.id }">
 				            	<img class="media-object" src="img/${project.id }.jpg">
 				        	</a>
 				        

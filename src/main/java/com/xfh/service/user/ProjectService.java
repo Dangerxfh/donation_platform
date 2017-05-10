@@ -24,6 +24,6 @@ public interface ProjectService {
 	//获取与本活动相关的捐款记录列表
 	public List<Do_Record> getRecords(Project project)throws Exception;
 	
-	//捐款
-	public void donate (Integer id,Do_Record record) throws Exception;
+	
+	
 }

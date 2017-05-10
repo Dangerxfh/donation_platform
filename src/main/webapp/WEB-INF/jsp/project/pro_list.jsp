@@ -29,33 +29,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<div class="navbar navbar-default navbar-fixed-top">
-        <div class="navbar-header">
-           　        		<a href="##" class="navbar-brand">爱心公益网 </a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li><a href="<%=basePath%>person/index.jsp">公益首页</a></li>
-            <li><a href="<%=basePath%>person/listinfo.jsp">公益活动</a></li>     
-            <li><a href="<%=basePath%>person/personal.jsp">个人中心</a></li>
-            <li><a href="<%=basePath%>person/help.jsp">我要求助</a></li>
-            <li><a href="<%=basePath%>admin/allproject.jsp">管理活动</a></li>
-        </ul>
-        <form action="##" class="navbar-form navbar-left">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="请输入关键词" />
-            </div>
-            <button type="submit" class="btn btn-default">搜索</button>
-        </form>
-        <div class="navbar-right text-danger">
-        	欢迎，<span></span>登录&nbsp;|&nbsp;<span><a class="text-danger">注销</a></span>
-        </div>
-    </div>
+  	<c:import url="../top.jsp"/>
     <div class="container">
 	    <div class="row col-xs-10 col-xs-offset-1">
 	    	<div class="row">
 	    		<ol class="breadcrumb" style="background: none;">
 				    <li><a href="#" class="text-a">首页</a></li>
-				    <li><a href="#">项目列表</a></li>
+				    <li><a href="project.list/all/1">项目列表</a></li>
 				</ol>
 	    	</div>
 	    	<div class="row rowtop">	
@@ -83,14 +63,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<c:forEach items="${pageProjectList}" var="project">
 					<div class="media">	
 					<br>				 
-				        <a class="pull-left fixedimg" href="#">
+				        <a class="pull-left fixedimg" href="project/detail/${project.id }">
 				            <img class="media-object" src="./img/list1.jpg">
 				        </a>
 				        <div class="media-body">
 							<div class="leftmedia">
 								
 								<!-- 活动标题 -->
-					        	<span class="media-heading h4"><a class="text-a" href="#">${project.pro_Title }</a></span>
+					        	<span class="media-heading h4"><a class="text-a" href="project/detail/${project.id }">${project.pro_Title }</a></span>
 					     		<div class="descript small">
 					            	<span class="text-muted">项目简介&nbsp;|&nbsp;</span>
 					            	<!-- 项目简介 -->
@@ -142,15 +122,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        </div>				        
     				</div>
 				</c:forEach>
-    				<!-- 重复重复 --> 	
     				
-    				
-    				
-    				<!-- 重复重复 -->
     				<!-- 分页导航 -->
     				<ul class="pager">
-					    <li><a href="project/list/${requestScope.page-1==0?1:requestScope.page-1}">«上一页</a></li>
-					    <li><a href="project/list/${requestScope.page+1>page_sum?page_sum:requestScope.page+1}">下一页»</a></li>
+					    <li><a href="project/list/${requestScope.type }/${requestScope.page-1==0?1:requestScope.page-1}">«上一页</a></li>
+					    <li><a href="project/list/${requestScope.type }/${requestScope.page+1>page_sum?page_sum:requestScope.page+1}">下一页»</a></li>
 					</ul>
 			</div>
 	    

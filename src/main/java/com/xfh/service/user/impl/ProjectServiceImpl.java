@@ -1,9 +1,7 @@
 package com.xfh.service.user.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +14,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.xfh.dao.IBaseDao;
 import com.xfh.model.Do_Record;
 import com.xfh.model.Project;
-import com.xfh.model.User;
 import com.xfh.service.user.ProjectService;
 @Service("projectService")
 public class ProjectServiceImpl implements ProjectService {
@@ -102,26 +99,8 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Do_Record> getRecords(Project project) throws Exception {
 		List<Do_Record> do_Records=recordDao.getByParam(Do_Record.class,"proByProId",project);
-		
 		return do_Records;
 	}
 
-	//捐款
-	@Override
-	public void donate(Integer id,Do_Record record) throws Exception {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		Project project=projectDao.getByParam(Project.class,"id",id).get(0);
-		User user=(User) request.getSession().getAttribute("user");
-		
-		project.setPro_CurNumber(project.getPro_CurNumber()+record.getMon_Number());
-		project.setPro_CurPeoples(project.getPro_CurPeoples()+1);
-		projectDao.update(project);
-		
-		record.setUserByUserId(user);
-		record.setProByProId(project);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-		String do_Time=format.format(new Date());
-		record.setDo_Time(do_Time);
-		recordDao.save(record);
-	}
+	
 }

@@ -119,11 +119,11 @@ public class User implements Serializable{
 		this.recById = recById;
 	}
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 			name="user_pro",
-			joinColumns=@JoinColumn(name="pro_id"),
-			inverseJoinColumns=@JoinColumn(name="user_id")
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="pro_id")
 	)
 	public Set<Project> getProById() {
 		return proById;

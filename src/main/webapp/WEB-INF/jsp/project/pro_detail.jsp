@@ -56,9 +56,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 <hr class="divider"/>
 					 <!-- 选择要捐的金额 -->
 					 <div class="moneydiv">
-						 <form action="project/donate/${requestScope.project.id}" method="post">
+						 <form action="user/donate/${requestScope.project.id}" method="post">
 						 		金额：
-						 	<input type="number" step="20" min="20" name="mon_Number">
+						 	<input type="number" step="20" min="20" required="required" name="mon_Number">
 						 	<button type="submit" class="btn btn-success btn-sm">我要捐钱</button>
 						 </form>
 					 </div>

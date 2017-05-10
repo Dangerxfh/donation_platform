@@ -25,10 +25,9 @@ public class ProjectController {
 	@RequestMapping(value="/list/{type}/{page}")
 	public String pageProject(@PathVariable("type")String type,@PathVariable("page")Integer page,ModelMap map) throws Exception{
 		Integer cur_page=projectService.getProjectByPage(type,page);
-		System.out.println("cur_page:"+cur_page);
 		map.addAttribute("page",cur_page);
 		map.addAttribute("type",type);
-		return "jsp/project/pro_list";
+		return "project/pro_list";
 	}
 	
 	//根据id获取活动,根据活动获取捐款记录列表
@@ -39,14 +38,7 @@ public class ProjectController {
 		
 		map.addAttribute("project", project);
 		map.addAttribute("do_Records", do_Records);
-		return "jsp/project/pro_detail";
-	}
-	
-	//捐款
-	@RequestMapping(value="/donate/{id}",method=RequestMethod.POST)
-	public String donate(@PathVariable Integer id,@ModelAttribute Do_Record do_Record) throws Exception{
-		projectService.donate(id, do_Record);
-		return "redirect:/project/detail/"+id;
+		return "project/pro_detail";
 	}
 	
 }

@@ -34,10 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div class="col-xs-11 col-xs-offset-1">
 	    	<div class="col-xs-3" >
 	            <ul class="nav nav-tabs nav-stacked text-center" id="sidebarMenu" >
-	                <li id="li1" class="active"><a>我献出的爱心</a></li>
-	                <li id="li2"><a href="<%=basePath%>user/detail?type=goods">我捐出的物资</a></li>
-	                <li id="li3"><a href="<%=basePath%>user/detail?type=money">我的捐款记录</a></li>
-	                <li id="li4"><a href="<%=basePath%>user/detail?type=myinfo">修改个人信息</a></li>
+	                <li id="li1" class="active"><a href="<%=basePath%>user/detail/project">我献出的爱心</a></li>
+	                <li id="li3"><a href="<%=basePath%>user/detail/money">我的捐款记录</a></li>
+	                <li id="li4"><a href="<%=basePath%>user/detail/myinfo">修改个人信息</a></li>
 	            </ul>
 	        </div>
 	        <div class="col-xs-9 right">
@@ -46,29 +45,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="title">
 							 <span class="listtitle h2">
 							 	我的爱心记录
-							 </span>
-							 
-						</div>
+							 </span>						 
+			</div>
 					</div>
 		        </div>
-		        <c:forEach items="${my_projects}" var="project">
+		        <c:forEach items="${requestScope.person_projects}" var="project">
 			        <div class="col-xs-6">
 		        		<div class="content">
-		        			<a href="project/detail?pro_id=${project.id }">
+		        			<a href="project/detail/${project.id }">
 		        				<img src="<%=basePath%>img/one.jpg">
 		        			</a>
 			        		<div class="conbottom">
 			        			<!-- 项目标题 -->
-			        			<p><a href="project/detail?pro_id=${project.id }">${project.pro_Title}</a></p>
+			        			<p><a href="project/detail/${project.id }">${project.pro_Title}</a></p>
 			        			<!-- 已筹 -->
-			        			<!-- 捐钱 -->
-			        			<c:if test="${project.pro_Type==1}">
-		        					<p class="text-muted">已筹：<span class="text-red">${project.pro_CurNumber }</span>元</p>
-			        			</c:if>
-			        			<!-- 捐物品 -->
-			        			<c:if test="${project.pro_Type==2}">
-	        						<p class="text-muted">已筹物品：<span class="text-red">${project.pro_CurNumber }</span>件</p>
-			        			</c:if>
+
+		        				<p class="text-muted">已筹：<span class="text-red">${project.pro_CurNumber }</span>元</p>    		
 							
 								<!-- 捐款人次 -->
 								<p class="text-muted left">捐款人次:<span>${project.pro_CurPeoples }</span>人次</p>

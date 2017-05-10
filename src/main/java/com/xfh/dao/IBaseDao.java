@@ -28,4 +28,7 @@ public interface IBaseDao<T> {
 		
 		//修改
 		public void update (T t);
+		
+		//多对多查询
+		public List<T> getWithMany(Class t,String table,Object value);
 }

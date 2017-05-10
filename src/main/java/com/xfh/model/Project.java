@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -125,7 +126,7 @@ public class Project implements Serializable{
 		this.pro_CurPeoples = pro_CurPeoples;
 	}
 	
-	@ManyToMany(mappedBy="proById")
+	@ManyToMany(mappedBy="proById",cascade=CascadeType.ALL)
 	public Set<User> getUserByUserId() {
 		return userByUserId;
 	}

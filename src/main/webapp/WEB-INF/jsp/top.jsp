@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			$("#logout").show();
     			
     			//将用户名的链接设置为用户详情页面
-    			$("#login").attr('href','user/detail');
+    			$("#login").attr('href','user/detail/projects');
     		}
     	});
     </script>
@@ -51,12 +51,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <ul class="nav navbar-nav">
             <li><a href="##">公益首页</a></li>
             <li><a href="project/list/all/1">公益活动</a></li>     
-            <li><a href="user/detail" id="personal" style="display: none;">个人中心</a></li>
+            <li><a href="user/detail/projects" id="personal" style="display: none;">个人中心</a></li>
             <li><a href="admin/projectlist?pro_status=all&page=1" id="adminoperate" style="display: none;">管理活动</a></li>
         </ul>
 
         <div class="navbar-right text-danger">
-        	欢迎，<span id="user_Name"></span><a href="jsp/user/user_login.jsp" id="login">请登录</a>&nbsp;&nbsp;<span><a href="user/logout" class="text-danger" id="logout" style="display: none;">注销</a></span>
+        	欢迎，<span id="user_Name"></span><a href="user/tologin" id="login">请登录</a>&nbsp;&nbsp;<span><a href="user/logout" class="text-danger" id="logout" style="display: none;">注销</a></span>
         </div>
     </div>
   </body>
