@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <style type="text/css">
 
     </style>
-<body onload="load()">
+<body>
 	 
 	 <c:import url="../top.jsp"></c:import>
 <div class="container">

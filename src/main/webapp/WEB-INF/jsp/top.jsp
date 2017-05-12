@@ -20,15 +20,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 <script type="text/javascript">
     	$(function(){
     		//如果用户不为空
-    		if(${user!=null}){
+    		if(${sessionScope.user!=null}){
     			//将用户名显示在页面
-    			$("#login").text('${user.user_Name}');
+    			$("#login").text('${sessionScope.user.user_Name}');
     			
-    			if(${user.user_Name!='admin'})
+    			if(${sessionScope.user.user_Name!='admin'})
     			//将“个人中心”显示在页面
     			$("#personal").show();
     			
-    			if(${user.user_Name=='admin'})
+    			if(${sessionScope.user.user_Name=='admin'})
     			//将“管理活动”显示在页面
     			$("#adminoperate").show();
     			
@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li><a href="##">公益首页</a></li>
             <li><a href="project/list/all/1">公益活动</a></li>     
             <li><a href="user/detail/projects" id="personal" style="display: none;">个人中心</a></li>
-            <li><a href="admin/projectlist?pro_status=all&page=1" id="adminoperate" style="display: none;">管理活动</a></li>
+            <li><a href="admin/project/list/all/1" id="adminoperate" style="display: none;">管理活动</a></li>
         </ul>
 
         <div class="navbar-right text-danger">

@@ -26,19 +26,21 @@ public class IBaseDaoImpl<T> implements IBaseDao<T>{
 		return sessionFactory.getCurrentSession();
 	}
 		
-	//
+	//保存
 	@Override
 	public void save(T t){
 		getSession().save(t);
 	}
 	
 	
-	//鏍规嵁鍙傛暟鏌ヨ
+	//根据参数查询
 	@Override
 	public  List<T> getByParam(Class t,String param,Object value)throws Exception{
-
-		List<T> tList=getSession().createCriteria(t).add(Restrictions.eq(param, value)).list();
-		return tList;
+		Criteria criteria=getSession().createCriteria(t);
+		criteria.add(Restrictions.eq(param, value));
+		//去掉重复元素
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return criteria.list();
 	}
 	
 	//type=1:精确查询/type=2:模糊查询
@@ -46,31 +48,32 @@ public class IBaseDaoImpl<T> implements IBaseDao<T>{
 	public List<T> getByParams(int type,Class t,Map<String,Object> params){
 	
 		List<T> tList=null;
-		//鍒涘缓 Criteria
 		Criteria criteria=getSession().createCriteria(t);
-		//鏌ヨ
 		for(String param:params.keySet()){
 			if(type==1)
-			 tList=criteria.add(Restrictions.eq(param, params.get(param))).list();
+				criteria.add(Restrictions.eq(param, params.get(param))).list();
 			if(type==2)
-				tList=criteria.add(Restrictions.ilike(param, (String) params.get(param),MatchMode.ANYWHERE)).list();
+				criteria.add(Restrictions.ilike(param, (String) params.get(param),MatchMode.ANYWHERE)).list();
 		}
+		//去掉重复元素
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		tList=criteria.list();
 		return tList;
 	}
 
-	//
+	//删除
 	@Override
 	public void delete(T t) {
 		getSession().delete(t);
 	}
 	
-	//鏇存柊鎿嶄綔
+	//更新
 	@Override
 	public void update(T t) {
 		getSession().update(t);
 	}
 
-	//or鏌ヨ
+	//or查询
 	@Override
 	public List<T> getWithOr(Class t, String param, List<?> list) {
 		List<T> tList=null;
@@ -80,7 +83,7 @@ public class IBaseDaoImpl<T> implements IBaseDao<T>{
 		return tList;
 	}
 
-	//鏌ヨ鎵�湁璁板綍
+	//获取所有记录
 	@Override
 	public List<T> getAll(Class t) {
 		List<T> tList=null;
@@ -93,12 +96,14 @@ public class IBaseDaoImpl<T> implements IBaseDao<T>{
 	//多对多查询
 	@Override
 	public List<T> getWithMany(Class t, String table,Object value) {
-		List<T> tlist = getSession().createCriteria(t)
+		Criteria criteria=getSession().createCriteria(t);
+		List<T> tlist=null;
                 //必需创建一个别名，roles为user中包 含的role 的list.
-                .createAlias(table,table)
+				criteria.createAlias(table,table);
                 //roleId为传进来进行查询的角色ID
-                .add(Restrictions.eq(table+".id",value))
-                .list(); 
+				criteria.add(Restrictions.eq(table+".id",value));
+				criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+				tlist=criteria.list(); 
 		return tlist;
 	}
 

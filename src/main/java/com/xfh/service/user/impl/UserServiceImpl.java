@@ -39,12 +39,13 @@ public class UserServiceImpl implements UserService {
 		params.put("user_Pass",user.getUser_Pass());
 		
 		List<User> users=userDao.getByParams(1,User.class,params);
+		if(users.isEmpty())
+			return null;
 		user=users.get(0);
-		Set<Project> projects=new HashSet<Project>(projectDao.getWithMany(Project.class,"userByUserId",user.getId()));
-		user.setProById(projects);
 		
-		Set<Do_Record> do_Records=new HashSet<Do_Record>(recordDao.getByParam(Do_Record.class,"userByUserId",user));
-		user.setRecById(do_Records);
+		getProjects(user);
+		getRecord(user);
+		
 		return user;
 	}
 
@@ -67,53 +68,64 @@ public class UserServiceImpl implements UserService {
 		return users.get(0);
 	}
 
+	//修改个人信息
+		@Override
+		public boolean userUpdate(User user) throws Exception {
+			List<User> users=userDao.getByParam(User.class,"user_Name",user.getUser_Name());
+			if(users.isEmpty() || users.get(0).getId()==user.getId()){
+				userDao.update(user);	
+				return true;
+			}
+			return false;
+		}
+
 	//捐款
 		@Override
 		public void donate(Integer id,Do_Record record) throws Exception {
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-			
-			Project project=null;
+		
 			User user=(User) request.getSession().getAttribute("user");
 			Set<Project> projects=new HashSet<Project>(projectDao.getWithMany(Project.class,"userByUserId", user.getId()));
-			//首先从参与的活动表中查询是否存在与当前id相等的活动
-			for(Project cur_project : user.getProById()){
-				if(cur_project.getId()==id)
-					project=cur_project;
-				System.out.println(cur_project.getId()+"=============");
-			}
-			//如果没有，则从数据库中查询
-			if(project==null){
-				project=projectDao.getByParam(Project.class,"id",id).get(0);
-				//更新参与的活动集合
-				projects.add(project);	
-			}
-			user.setProById(projects);
-			userDao.update(user);
+		
+			Project project=projectDao.getByParam(Project.class,"id",id).get(0);
 			
+			//更新参与活动总数和总人数
 			project.setPro_CurNumber(project.getPro_CurNumber()+record.getMon_Number());
 			project.setPro_CurPeoples(project.getPro_CurPeoples()+1);
 			projectDao.update(project);
 			
+			//更新用户（包括参与的活动集合和捐款记录集合）
+			projects.add(project);
+			user.setProById(projects);
+			Set<Do_Record> do_Records=user.getRecById();
+			do_Records.add(record);
+			user.setRecById(do_Records);
+			
+			//保存捐款记录
 			record.setUserByUserId(user);
 			record.setProByProId(project);
 			SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 			String do_Time=format.format(new Date());
 			record.setDo_Time(do_Time);
 			recordDao.save(record);
-		}
-	//修改个人信息
-	@Override
-	public boolean userUpdate(User user) throws Exception {
-		List<User> users=userDao.getByParam(User.class,"user_Name",user.getUser_Name());
-		//System.out.println(users.get(0).getId()+" "+user.getId());
-		if(users.isEmpty() || users.get(0).getId()==user.getId()){
-			userDao.update(user);	
-			return true;
-		}
-		return false;
-	}
+			
+			
+			//userDao.update(user);
 
+		}
+
+		//获取用户参与的活动集合，并赋值
+		@Override
+		public void getProjects(User user ) {
+			Set<Project> projects=new HashSet<Project>(projectDao.getWithMany(Project.class,"userByUserId",user.getId()));
+			user.setProById(projects);
+		}
 	
-
+		//获取用户参与的捐款极了集合
+		@Override
+		public void getRecord(User user) throws Exception{
+			Set<Do_Record> do_Records=new HashSet<Do_Record>(recordDao.getByParam(Do_Record.class,"userByUserId",user));
+			user.setRecById(do_Records);
+		}
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -142,5 +143,24 @@ public class Project implements Serializable{
 		this.recById = recById;
 	}
 
+	//重写hashcode
+	@Override
+	public int hashCode() {
+		int result=1;
+		result=31*result+((id==null?0:id.hashCode()));
+		return result;
+	}
 	
+	//重写equals方法
+	@Override
+	public boolean equals(Object obj) {
+		if(this==obj)
+			return true;
+		if(obj==null || getClass()!=obj.getClass())
+			return false;
+		Project that=(Project) obj;
+		if(id!=that.id)
+			return false;
+		return true;
+	}
 }

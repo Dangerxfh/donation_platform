@@ -7,6 +7,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -111,7 +112,7 @@ public class User implements Serializable{
 		this.user_Address = user_Address;
 	}
 	
-	@OneToMany(mappedBy="userByUserId")
+	@OneToMany(mappedBy="userByUserId",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	public Set<Do_Record> getRecById() {
 		return recById;
 	}
@@ -119,7 +120,7 @@ public class User implements Serializable{
 		this.recById = recById;
 	}
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinTable(
 			name="user_pro",
 			joinColumns=@JoinColumn(name="user_id"),

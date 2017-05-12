@@ -3,18 +3,15 @@ package com.xfh.model;
 import java.io.Serializable;
 
 import javax.persistence.Basic;
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
 
 /**
  * 
@@ -60,7 +57,7 @@ public class Do_Record implements Serializable {
 		this.do_Time = do_Time;
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id",referencedColumnName="id")
 	public User getUserByUserId() {
 		return userByUserId;
@@ -69,7 +66,7 @@ public class Do_Record implements Serializable {
 		this.userByUserId = userByUserId;
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="pro_id",referencedColumnName="id")
 	public Project getProByProId() {
 		return proByProId;

@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <style type="text/css">
 
     </style>
-<body onload="load()">
+<body>
 	<c:import url="../top.jsp"/>
 <div class="container">
     <div class="jumbotron">
@@ -113,6 +113,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div id="update" class="panel" style="display: none;">
 						  <div class="panel-body">
 						    <form action="user/update" method="post">
+						    	<%-- <input type="hidden" name="recById" value="${user.recById }"/>
+						    	<input type="hidden" name="proById" value="${user.proById }"/> --%>
 						   		<input type="hidden" name="id" value="${user.id}"/>
 								用户名:<input type="text" class="form-control" name="user_Name" value="${user.user_Name }" pattern="^[A-Za-z0-9_\-\u4e00-\u9fa5]{2,16}" title="中文或字母或数字2-16位" required="required"><br>
 								密码:<input type="password" class="form-control" name="user_Pass" value="${user.user_Pass }" pattern="^[A-Za-z0-9]{2,16}" title="字母或数字2-16位" required="required"><br>

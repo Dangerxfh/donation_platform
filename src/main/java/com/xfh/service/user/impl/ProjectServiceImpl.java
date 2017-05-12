@@ -99,6 +99,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Do_Record> getRecords(Project project) throws Exception {
 		List<Do_Record> do_Records=recordDao.getByParam(Do_Record.class,"proByProId",project);
+		System.out.println("dorec==="+do_Records.size());
 		return do_Records;
 	}
 

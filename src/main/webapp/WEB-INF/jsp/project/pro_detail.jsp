@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    </div>
 		    <div class="row detailrow">
 		    	<div class="col-xs-6">
-		    		<img src="<%=basePath%>img/d1.jpg">
+		    		<img src="img/${requestScope.project.id }.jpg">
 		    		<span class="real-icon"></span>
 		    	</div>
 				<div class="col-xs-6 detailinfo">
@@ -42,12 +42,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 <!-- 目标数 -->
 					 <p>
 					 	<img src="<%=basePath%>img/icon1.png">
-					 	<span class="text-danger">${requestScope.project.pro_TargetNumber}</span>元/件
+					 	<span class="text-danger">${requestScope.project.pro_TargetNumber}</span>元
 					 </p>
 					 <!-- 已筹数 -->
 					 <p>
 					 	<img src="<%=basePath%>img/icon2.png">
-					 	<span class="text-danger">${requestScope.project.pro_CurNumber}</span>元/件
+					 	<span class="text-danger">${requestScope.project.pro_CurNumber}</span>元
 					 </p>
 					 <!-- 捐款起止时间 -->
 					 <div class="text-muted">时间：<span>${requestScope.project.pro_StartTime}</span>至<span>${requestScope.project.pro_EndTime}</span></div>

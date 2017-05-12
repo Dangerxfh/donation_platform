@@ -35,7 +35,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	        	User user=(User) request.getSession().getAttribute("user");
 	        	if(user!=null)
 	        		return true;
-	        	request.getRequestDispatcher("../tologin").forward(request, response);
+	        	request.getRequestDispatcher("/user/tologin").forward(request, response);
 		return false;
 	}
 

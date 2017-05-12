@@ -8,62 +8,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE>
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
-    <title>项目列表</title> 
+    <base href="<%=basePath%>">   
+    <title>项目列表</title>
+    <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.min.css">
  	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/nav.css">
- 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/listinfo.css">		
+ 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/listinfo.css">
  	<script src="<%=basePath%>js/jquery-2.2.3.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js" ></script>
-    <script src="<%=basePath%>js/downgundong.js"></script>
     <script type="text/javascript">
     function selectchange(index){
-   			window.location.href="<%=basePath%>project/list/"+index+"/1";
+   			window.location.href="<%=basePath%>admin/project/list/"+index+"/1";
     }
     $(function(){
     	/* 设置下拉菜单选中项为地址中的活动状态参数 */
         $("#selector").val('${requestScope.type}');
     });
 	</script>
-  </head>
-  
+  </head>  
   <body>
-  	<c:import url="../top.jsp"/>
+	<c:import url="admin_top.jsp"/>
     <div class="container">
 	    <div class="row col-xs-10 col-xs-offset-1">
 	    	<div class="row">
 	    		<ol class="breadcrumb" style="background: none;">
-				    <li><a href="#" class="text-a">首页</a></li>
-				    <li><a href="project.list/all/1">项目列表</a></li>
+				    <li><a href="<%=basePath%>admin/allproject.jsp" class="text-a">首页</a></li>
+				    <li>项目列表</li>
 				</ol>
 	    	</div>
-	    	<div class="row rowtop">	
-	   			<div class="news">
-					<ul class="list">
-						<li>腾讯公益大数据揭秘：看看哪里爱心最爆棚？</li>
-						<li>垃圾分类从鼓励到强制，你准备好了吗？，你准备好了吗？你准备好了吗？重要的事情说三遍</li>
-						<li>爱无国度，救助来自第三世界的人们，他们需要你的帮助！</li>
-						<li>世界地球日 讲好我们的地球故事</li>
-						<li>99公益日 一起爱！</li>
-					</ul>
-				</div>
-				<div class="pull-right select1">
-	    		项目状态:
-		    	<select onchange="selectchange(this.options[this.options.selectedIndex].value)" id="selector">
+	    	<div class="row rowtop" style="margin-top: -18px;">		    	
+		    	项目状态:
+		    	<!-- select选中状态未改变 -->
+		    		<select onchange="selectchange(this.options[this.options.selectedIndex].value)" id="selector">
 		    		    <option value="all" selected="selected">全部</option>
 		    			<option value="donate">募捐中</option>
 		    			<option value="execute">执行中</option>
 		    			<option value="end">结束</option>
-		    	</select>
-	    		</div>
+		    		</select>
 	    	</div>
 	    	<div class="row">			
-				<c:forEach items="${pageProjectList}" var="project">
+					<c:forEach items="${pageProjectList}" var="project">
 					<div class="media">	
 					<br>				 
 				        <a class="pull-left fixedimg" href="project/detail/${project.id }">
-				            <img class="media-object" src="img/${project.id }.jpg">
+				            <img class="media-object" src="./img/list1.jpg">
 				        </a>
 				        <div class="media-body">
 							<div class="leftmedia">
@@ -115,17 +103,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<!-- 进度条数字 -->
 									<span class="text-muted number">${project.pro_CurNumber>=project.pro_TargetNumber?100:project.pro_CurNumber*100/project.pro_TargetNumber}%</span> 
 								   
-									<a class="btn btn-success btn-sm" href="project/detail/${project.id }">我要参与</a> 
+								 	<p>
+										<a class="btn btn-success btn-sm" href="<%=basePath%>admin/project/update/${project.id}">修改</a> 			
+										<button class="btn btn-success btn-sm">删除</button>
+									</p>
 								</div>
 							</div>
 				        </div>				        
     				</div>
 				</c:forEach>
-    				
+    			
     				<!-- 分页导航 -->
     				<ul class="pager">
-					    <li><a href="project/list/${requestScope.type }/${requestScope.page-1==0?1:requestScope.page-1}">«上一页</a></li>
-					    <li><a href="project/list/${requestScope.type }/${requestScope.page+1>page_sum?page_sum:requestScope.page+1}">下一页»</a></li>
+					    <li><a href="#">«上一页</a></li>
+					    <li><a href="#">下一页»</a></li>
 					</ul>
 			</div>
 	    
@@ -136,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="layout partner">
 			<div class="hd"><h2>联系我们</h2></div>
 			<div class="bd"></div>
-			<div class="text-center">@版权归徐富豪 ，王小婷，王春晓所有</div>
+			<div class="text-center">@版权归XXX所有</div>
 	    </div>
     </footer>
   

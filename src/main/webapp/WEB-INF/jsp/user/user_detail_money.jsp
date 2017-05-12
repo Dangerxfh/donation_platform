@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <div class="col-xs-11 col-xs-offset-1">
 	    	<div class="col-xs-3"  >
 	            <ul class="nav nav-tabs nav-stacked text-center" id="sidebarMenu">
-	                <li id="li1"><a href="<%=basePath%>user/detail/project">我献出的爱心</a></li>
+	                <li id="li1"><a href="<%=basePath%>user/detail/projects">我献出的爱心</a></li>
 	                <li id="li3" class="active"><a href="<%=basePath%>user/detail/money">我的捐款记录</a></li>
 	            	<li id="li4"><a href="<%=basePath%>user/detail/myinfo">修改个人信息</a></li>
 	            </ul>
