@@ -9,5 +9,5 @@ public interface AdminProjectService {
 	//修改活动
 	public boolean updateProject(Project project) throws Exception;
 	//删除活动
-	public boolean deleteProject(Project project);
+	public void deleteProject(Integer id) throws Exception;
 }

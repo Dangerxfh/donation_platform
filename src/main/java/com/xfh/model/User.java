@@ -112,7 +112,7 @@ public class User implements Serializable{
 		this.user_Address = user_Address;
 	}
 	
-	@OneToMany(mappedBy="userByUserId",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="userByUserId",fetch=FetchType.LAZY)
 	public Set<Do_Record> getRecById() {
 		return recById;
 	}
@@ -120,7 +120,7 @@ public class User implements Serializable{
 		this.recById = recById;
 	}
 	
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 			name="user_pro",
 			joinColumns=@JoinColumn(name="user_id"),

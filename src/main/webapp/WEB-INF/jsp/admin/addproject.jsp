@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,46 +10,75 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">   
-    <title>项目列表</title>
+    <title>添加活动</title>
     <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.min.css">
  	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/nav.css">
- 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/addproject.css">		
+ 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/addproject.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/alertStyle.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/animate.css">			
     <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
  	<script src="<%=basePath%>js/jquery-2.2.3.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js" ></script>
+    <script src="<%=basePath%>js/project.js" ></script>
+    <script src="<%=basePath%>js/alertJS.js" ></script>
     <script type="text/javascript">
+     function doUpload() {  //Ajax异步上传图片  
+	     var formData = new FormData($("#uploadForm")[0]);    
+	     $.ajax({    
+	          url:'<%=basePath%>admin/project/uploadimg', 
+	          type: 'POST',    
+	          data:  new FormData($('#uploadForm')[0]),   
+	          async: false,    
+	          cache: false,    
+	          contentType: false,    
+	          processData: false, 
+	          success: function (returndata) {              
+	        		location.reload();
+	        		$("#noty_message").show();
+					$("#noty_message").text("添加成功");
+					$("#noty_message").fadeIn(3000);
+					 $("#noty_message").removeClass('animated  fadeInUp');
+			         $("#noty_message").addClass('animated fadeInUp');
+			         $("#noty_message").css({
+				
+				'opacity':'1'
+				
+			});
+			         //alert($("#noty_message").attr('class'));
+			        setTimeout(function(){
+			            $("#noty_message").removeClass('animated  fadeInUp');
+			            $("#noty_message").addClass('animated fadeOutUp');
+			        },2500); 
+	          },    
+	          error: function (returndata) {    
+	              alert(returndata);    
+	          }    
+     });    
+}   
 $(function(){
-	var t; 
-	$(".news").hover(function(){ 
-		 clearInterval(t);
-	},function(){ 
-		 t = setInterval(function(){ 
-				var ul = $(".list"); 
-				var liHeight = ul.find("li:last").height();
-				ul.animate({marginTop : liHeight +"px"},1000,function(){ 
-					ul.find("li:last").prependTo(ul);
-					ul.find("li:first").hide(); 
-					ul.css({marginTop:0}); 
-					ul.find("li:first").fadeIn(800); 
-				});         
-		},3000); 
-	 }).trigger("mouseleave"); 
+		
+		//点击input标签提示信息消失
+		$("input").click(function(){
+			$(".alert").hide();
+		});
+		if(${requestScope.pro_add=='false'}){
+			$("#noty_message").show();
+			$("#noty_message").text("活动名已存在");
+			$("#noty_message").css({
+				'color':'#ea6f5a',
+				'border-color':'#ea6f5a',
+				'opacity':'1',		
+			});
+			$("#noty_message").fadeIn(300);
+		}	
+	        $("#noty_message").removeClass('animated  fadeOutUp');
+	        $("#noty_message").addClass('animated fadeInUp');
+	        setTimeout(function(){
+	            $("#noty_message").removeClass('animated  fadeInUp');
+	            $("#noty_message").addClass('animated fadeOutUp');
+	        },2500)
 });
-function end(){
-            var endtime = $('#endTime').val();
-            var starttime = $('#startTime').val();
-            var start = new Date(starttime.replace("-", "/").replace("-", "/"));
-            var end = new Date(endtime.replace("-", "/").replace("-", "/"));
-            if (end < start) {
-                alert('结束日期不能小于开始日期！');
-                return false;
-            }
-            else {
-                return true;
-            }};
-
-
 </script>
     
   </head>
@@ -56,13 +87,16 @@ function end(){
 
     
   <body>
-	<jsp:include page="admin_top.jsp"></jsp:include>
+	
+	<c:import url="admin_top.jsp"/>
+	 <div id="noty_message" style="display: none;">
+	 </div>
     <div class="container">
 	    <div class="row col-xs-10 col-xs-offset-1">
 	    	<div class="row">
 	    		<ol class="breadcrumb" style="background: none;">
-				    <li><a href="<%=basePath%>admin/allproject.jsp" class="text-a">首页</a></li>
-				    <li>添加活动</li>
+				    <li><a href="<%=basePath%>admin/project/list/all/1" class="text-a">首页</a></li>
+				    <li>修改活动</li>
 				</ol>
 	    	</div>
 	    	<div class="row rowtop" style="margin-top: -18px;">	
@@ -77,45 +111,54 @@ function end(){
 				</div>
 	    	 		   
 	    	</div>
-	    	<div class="row">
-	    	<form action="">				
+	    	<div class="row">			
 					<div class="col-xs-10 col-xs-offset-1">	
 					<br>				 
 				        <div class="col-xs-5">
-				       		<div class="imgdiv">
-				       			<img src="" >
-				       		</div>
-				       		<br>
-				       		<p class="pull-right">
-				        		<button class="btn btn-success">添加图片</button>
-				            </p>
+					        <!-- 上传图片 -->
+					        <form method="post" id="uploadForm" enctype="multipart/form-data">	
+					        	<input type="hidden" name="id"/>			        	
+					       		<a href="javascript:;" class="a-upload">			        	
+					       			<input type="file"  id="pic" name="pic" onchange="doUpload()"/>添加图片   
+					       		</a>	   			  
+					        </form>
+					        <br>
+					    
+					     
+	     		       	<div class="imgdiv">
+					       		<img id="showpic" src="img/upload.jpg" >
+					       	</div>
+				       		<br>	
 				        </div>
-				        <div class="col-xs-7">
-				        						
-					        	<span>项目标题</span>
-					        	<input class="form-control" type="text" placeholder="请输入项目标题" required="required">	    
+				        <div class="col-xs-7">	      
+					    
+				        	<form action="admin/project/addP" method="post">
+				        								
+					        	<span>活动标题</span>
+					        	<input class="form-control" name="pro_Title" pattern="^[A-Za-z0-9_\-\u4e00-\u9fa5]+" title="中文或字母或数字"  required="required" type="text">
 					     	    <span>项目简介</span>
-					        	<textarea rows="3" cols="30" required="required"></textarea><br>
-					        	<span>募捐目标</span>
-								<input class="form-control" type="text" placeholder="请输入你的目标" required="required">
-								<span>项目起止时间 </span>
+					        	<textarea rows="3" cols="30" name="pro_Des" required="required"> </textarea><br>
+					        	<span>筹款目标</span>
+								<input class="form-control" type="Number" name="pro_TargetNumber" required="required" >
+								<span>筹款起止时间 </span>
 								<p>
-									<input class="form-control left" type="date" required="required" id="startTime">
+									<input class="form-control left" type="date" name="pro_StartTime" required="required"  id="startTime">
 									<span>至</span>
-									<input class="form-control right" type="date" required="required" id="endTime" onblur="end()">
+									<input class="form-control right" type="date" name="pro_EndTime" required="required" id="endTime" onblur="end()">
 								</p>
 								<span>执 行 方 </span>
-								<input class="form-control" type="text" placeholder="请输入项目执行方" required="required">
+								<input class="form-control" type="text" pattern="^[A-Za-z0-9_\-\u4e00-\u9fa5]+" title="中文或字母或数字" name="pro_Sponsor">
 								<span>项目状态</span>
-								<select class="form-control">
-								<option value="1">募捐中</option>
-								<option value="1">执行中</option>
-								<option value="1">已结束</option>
+								<select class="form-control" name="pro_Status">
+								<option selected="selected" value="donate">募捐中</option>
+								<option value="execute">执行中</option>
+								<option value="end">已结束</option>
 								</select><br>
 								<button class="btn btn-success pull-right">添加活动</button>															
+				      		</form>	  
 				        </div>				        
     				</div>
-    			</form>	  
+    		
 			</div>	
 		   
 	    </div>

@@ -53,7 +53,7 @@ public class UserController {
     		session.setAttribute("user",cur_user);
     		if(cur_user.getUser_Name().equals("admin"))
     			return "redirect:/admin/project/list/all/1";
-    		if(url==null)
+    		if(url==null || url.indexOf("admin")>0)
     			return "forward:/beforeindex";	
     		return "redirect:"+url;
     	}

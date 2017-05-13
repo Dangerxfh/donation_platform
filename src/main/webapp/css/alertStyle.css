@@ -1,0 +1,24 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+#noty_message{
+    background-color:white;
+    border-radius: 4px;
+    border: 1px solid rgb(73, 190, 56);
+    box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px;
+    color: rgb(73, 190, 56);
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    padding: 10px;
+    width: 300px;
+    position: fixed;
+    margin-left: 524px;    
+   /*  margin-left:auto;
+    margin-right: auto; */
+    opacity: 0;
+    z-index: 100;
+
+}

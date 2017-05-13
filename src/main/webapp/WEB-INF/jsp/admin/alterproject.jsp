@@ -14,11 +14,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.min.css">
  	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/nav.css">
- 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/addproject.css">		
+ 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/addproject.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/alertStyle.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/animate.css">			
     <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
  	<script src="<%=basePath%>js/jquery-2.2.3.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js" ></script>
     <script src="<%=basePath%>js/project.js" ></script>
+    <script src="<%=basePath%>js/alertJS.js" ></script>
     <script type="text/javascript">
      function doUpload() {  //Ajax异步上传图片  
 	     var formData = new FormData($("#uploadForm")[0]);    
@@ -30,55 +33,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          cache: false,    
 	          contentType: false,    
 	          processData: false, 
-	          success: function (returndata) {    
-	            	//$("#showpic").attr("src","img/${updateproject.id }.jpg");/*这是预览图片用的，自己在文件上传表单外添加*/  
-	        		//location.replace(location.href);
+	          success: function (returndata) {              
 	        		location.reload();
+	        		$("#noty_message").show();
+					$("#noty_message").text("修改成功");
+					$("#noty_message").fadeIn(3000);
+					 $("#noty_message").removeClass('animated  fadeInUp');
+			         $("#noty_message").addClass('animated fadeInUp');
+			         $("#noty_message").css({
+				
+				'opacity':'1'
+				
+			});
+			         //alert($("#noty_message").attr('class'));
+			        setTimeout(function(){
+			            $("#noty_message").removeClass('animated  fadeInUp');
+			            $("#noty_message").addClass('animated fadeOutUp');
+			        },2500); 
 	          },    
 	          error: function (returndata) {    
 	              alert(returndata);    
 	          }    
      });    
-}
-   
- function end(){
-     var endtime = $('#endTime').val();
-     var starttime = $('#startTime').val();
-     var start = new Date(starttime.replace("-", "/").replace("-", "/"));
-     var end = new Date(endtime.replace("-", "/").replace("-", "/"));
-     if (end <=start) {
-         alert('结束日期不能小于开始日期！');
-         $('#endTime').val(null);
-         return false;
-     }
-     else {
-         return true;
-     }};
-    
+}   
+
 $(function(){
-		
+		var flush=false;
+		function myFunction() {
+		 	 flush=true;
+		}
+		//alert(flush);
 		//点击input标签提示信息消失
 		$("input").click(function(){
 			$(".alert").hide();
 		});
-		if(${requestScope.pro_update==false}){
-			$(".alert").show();
+		
+		if(${requestScope.pro_update=='false'}  && flush==false){
+			$("#noty_message").show();
+			$("#noty_message").text("活动名已存在");
+			$("#noty_message").css({
+				'color':'#ea6f5a',
+				'border-color':'#ea6f5a',
+				'opacity':'1',		
+			});
+			$("#noty_message").fadeIn(300);
+		}	
+		if(${requestScope.pro_update=='true'}){
+			$("#noty_message").show();
+			$("#noty_message").text("修改成功");
+			$("#noty_message").fadeIn(300);
 		}
-	var t; 
-	$(".news").hover(function(){ 
-		 clearInterval(t);
-	},function(){ 
-		 t = setInterval(function(){ 
-				var ul = $(".list"); 
-				var liHeight = ul.find("li:last").height();
-				ul.animate({marginTop : liHeight +"px"},1000,function(){ 
-					ul.find("li:last").prependTo(ul);
-					ul.find("li:first").hide(); 
-					ul.css({marginTop:0}); 
-					ul.find("li:first").fadeIn(800); 
-				});         
-		},3000); 
-	 }).trigger("mouseleave"); 
+	        $("#noty_message").removeClass('animated  fadeOutUp');
+	        $("#noty_message").addClass('animated fadeInUp');
+	        setTimeout(function(){
+	            $("#noty_message").removeClass('animated  fadeInUp');
+	            $("#noty_message").addClass('animated fadeOutUp');
+	        },2500)
 });
 </script>
     
@@ -87,8 +97,11 @@ $(function(){
 </style>
 
     
-  <body>
+  <body onbeforeunload="return myFunction()">
+	
 	<c:import url="admin_top.jsp"/>
+	 <div id="noty_message" style="display: none;">
+	 </div>
     <div class="container">
 	    <div class="row col-xs-10 col-xs-offset-1">
 	    	<div class="row">
@@ -128,28 +141,26 @@ $(function(){
 					       	</div>
 				       		<br>	
 				        </div>
-				        <div class="col-xs-7">
-					        <div class="alert alert-danger" style="display: none;">
-					    		活动标题已存在！！！
-					    	</div>
+				        <div class="col-xs-7">	      
+					    
 				        	<form action="admin/project/updateP" method="post">	
 				        		<input type="hidden" name="id" value="${requestScope.project.id}"/>
 				        		<input type="hidden" name="pro_CurNumber" value="${requestScope.project.pro_CurNumber}"/>	
 				        		<input type="hidden" name="pro_CurPeoples" value="${requestScope.project.pro_CurPeoples}"/>				
 					        	<span>活动标题</span>
-					        	<input class="form-control" name="pro_Title" value="${requestScope.project.pro_Title }" type="text">
+					        	<input class="form-control" name="pro_Title" pattern="^[A-Za-z0-9_\-\u4e00-\u9fa5]+" title="中文或字母或数字" value="${requestScope.project.pro_Title }" type="text">
 					     	    <span>项目简介</span>
-					        	<textarea rows="3" cols="30" name="pro_Des" > ${requestScope.project.pro_Des }</textarea><br>
+					        	<textarea rows="3" cols="30" name="pro_Des"  > ${requestScope.project.pro_Des }</textarea><br>
 					        	<span>筹款目标</span>
-								<input class="form-control" type="text" name="pro_TargetNumber" value="${requestScope.project.pro_TargetNumber }">
+								<input class="form-control" type="Number" name="pro_TargetNumber" value="${requestScope.project.pro_TargetNumber }">
 								<span>筹款起止时间 </span>
 								<p>
-									<input class="form-control left" type="date" name="pro_StartTime" value="${requestScope.project.pro_StartTime }">
+									<input class="form-control left" type="date" name="pro_StartTime" value="${requestScope.project.pro_StartTime }" id="startTime">
 									<span>至</span>
-									<input class="form-control right" type="date" name="pro_EndTime" value="${requestScope.project.pro_EndTime }">
+									<input class="form-control right" type="date" name="pro_EndTime" value="${requestScope.project.pro_EndTime }" id="endTime" onblur="end()">
 								</p>
 								<span>执 行 方 </span>
-								<input class="form-control" type="text" name="pro_Sponsor" value="${requestScope.project.pro_Sponsor }">
+								<input class="form-control" type="text" name="pro_Sponsor" pattern="^[A-Za-z0-9_\-\u4e00-\u9fa5]+" title="中文或字母或数字" value="${requestScope.project.pro_Sponsor }">
 								<span>项目状态</span>
 								<select class="form-control" name="pro_Status">
 								<option selected="selected" value="donate">募捐中</option>

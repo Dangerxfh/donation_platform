@@ -14,8 +14,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.min.css">
  	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/nav.css">
  	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/listinfo.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/alertStyle.css">
+ 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/animate.css">		
  	<script src="<%=basePath%>js/jquery-2.2.3.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js" ></script>
+    <script src="<%=basePath%>js/alertJS.js" ></script>
     <script type="text/javascript">
     function selectchange(index){
    			window.location.href="<%=basePath%>admin/project/list/"+index+"/1";
@@ -23,16 +26,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     $(function(){
     	/* 设置下拉菜单选中项为地址中的活动状态参数 */
         $("#selector").val('${requestScope.type}');
+        
+        if(${requestScope.pro_add=='true'}){
+			$("#noty_message").show();
+			$("#noty_message").text("添加成功");
+			$("#noty_message").fadeIn(300);
+		}
+	        $("#noty_message").removeClass('animated  fadeOutUp');
+	        $("#noty_message").addClass('animated fadeInUp');
+	        setTimeout(function(){
+	            $("#noty_message").removeClass('animated  fadeInUp');
+	            $("#noty_message").addClass('animated fadeOutUp');
+	        },2500)
     });
 	</script>
   </head>  
   <body>
 	<c:import url="admin_top.jsp"/>
+	<div id="noty_message" style="display: none;">
+	 </div>
     <div class="container">
 	    <div class="row col-xs-10 col-xs-offset-1">
 	    	<div class="row">
 	    		<ol class="breadcrumb" style="background: none;">
-				    <li><a href="<%=basePath%>admin/allproject.jsp" class="text-a">首页</a></li>
+				    <li><a href="admin/project/list/all/1" class="text-a">首页</a></li>
 				    <li>项目列表</li>
 				</ol>
 	    	</div>
@@ -51,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="media">	
 					<br>				 
 				        <a class="pull-left fixedimg" href="project/detail/${project.id }">
-				            <img class="media-object" src="./img/list1.jpg">
+				            <img class="media-object" src="img/${project.id}.jpg">
 				        </a>
 				        <div class="media-body">
 							<div class="leftmedia">
@@ -105,8 +122,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								   
 								 	<p>
 										<a class="btn btn-success btn-sm" href="<%=basePath%>admin/project/update/${project.id}">修改</a> 			
-										<button class="btn btn-success btn-sm">删除</button>
+										<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#${project.id}">删除</button>
 									</p>
+									<!--模态框 -->
+										<div class="modal"  id="${project.id}">
+
+										        <div class="modal-dialog">
+										
+										            <div class="modal-content">
+										
+										                <div class="modal-header">
+										                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+										                    <h4 class="modal-title">删除活动</h4>
+										                </div>
+										
+										                <div class="modal-body">
+										                    <p>真的要删除"${project.pro_Title}" 活动吗?</p>
+										                </div>
+										
+										                <div class="modal-footer">
+										                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+										                    <a href="admin/project/delete/${project.id }"><button type="button" class="btn btn-primary">删除</button></a>
+										                </div>
+										
+										            </div>
+										        </div>
+										    </div>
 								</div>
 							</div>
 				        </div>				        
@@ -115,8 +156,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     			
     				<!-- 分页导航 -->
     				<ul class="pager">
-					    <li><a href="#">«上一页</a></li>
-					    <li><a href="#">下一页»</a></li>
+					    <li><a href="admin/project/list/${requestScope.type }/${requestScope.page-1==0?1:requestScope.page-1}">«上一页</a></li>
+					    <li><a href="admin/project/list/${requestScope.type }/${requestScope.page+1>page_sum?page_sum:requestScope.page+1}">下一页»</a></li>
 					</ul>
 			</div>
 	    

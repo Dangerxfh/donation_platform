@@ -54,14 +54,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 <!-- 已捐人次 -->
 					 <div class="text-muted">捐款人次：<span>${requestScope.project.pro_CurPeoples}</span>人次</div>
 					 <hr class="divider"/>
-					 <!-- 选择要捐的金额 -->
-					 <div class="moneydiv">
-						 <form action="user/donate/${requestScope.project.id}" method="post">
-						 		金额：
-						 	<input type="number" step="20" min="20" required="required" name="mon_Number">
-						 	<button type="submit" class="btn btn-success btn-sm">我要捐钱</button>
-						 </form>
-					 </div>
+					 <c:if test="${requestScope.project.pro_Status=='donate'}">
+						 <!-- 选择要捐的金额 -->
+						 <div class="moneydiv">
+							 <form action="user/donate/${requestScope.project.id}" method="post">
+							 		金额：
+							 	<input type="number" step="20" min="20" required="required" name="mon_Number">
+							 	<button type="submit" class="btn btn-success btn-sm">我要捐钱</button>
+							 </form>
+						 </div>
+					 </c:if>
+					 <c:if test="${requestScope.project.pro_Status!='donate'}">
+					 	<button class="btn btn-lg" disabled="disabled">活动已结束</button>
+					 </c:if>
 				</div>
 		     	
 		    </div>

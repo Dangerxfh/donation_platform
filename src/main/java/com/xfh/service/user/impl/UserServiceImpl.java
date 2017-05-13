@@ -100,6 +100,7 @@ public class UserServiceImpl implements UserService {
 			Set<Do_Record> do_Records=user.getRecById();
 			do_Records.add(record);
 			user.setRecById(do_Records);
+			userDao.update(user);
 			
 			//保存捐款记录
 			record.setUserByUserId(user);

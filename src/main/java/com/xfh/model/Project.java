@@ -127,7 +127,7 @@ public class Project implements Serializable{
 		this.pro_CurPeoples = pro_CurPeoples;
 	}
 	
-	@ManyToMany(mappedBy="proById",cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy="proById",fetch=FetchType.EAGER)
 	public Set<User> getUserByUserId() {
 		return userByUserId;
 	}
