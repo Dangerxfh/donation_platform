@@ -23,6 +23,7 @@ import com.xfh.service.user.UserService;
 
 /**
  * Created by Watson on 2017/4/10.
+ * 
  */
 @Controller
 @RequestMapping(value = "/user")
@@ -34,12 +35,13 @@ public class UserController {
 	public String toLogin(HttpServletRequest request){
 		String url=request.getHeader("Referer");
 		request.getSession().setAttribute("url", url);
-		//if(url.indexOf("login")>0)
+		if(url.indexOf("tologin")>0)
+			return "redirect:/beforeindex";
 		System.out.println("tologin==="+url);
 		return "user/user_login";
 	}
 	
-	@RequestMapping(value="toregister")
+	@RequestMapping(value="/toregister")
 	public String toRegister(){
 		return "user/user_register";
 	}
@@ -47,7 +49,6 @@ public class UserController {
     @RequestMapping(value="/login",method = RequestMethod.POST)
     public String login(@ModelAttribute User user,HttpSession session,ModelMap map) throws Exception{
 		String url=(String) session.getAttribute("url");
-		System.out.println("login==="+url);
 		User cur_user=userService.userLogin(user);
     	if(cur_user!=null){
     		session.setAttribute("user",cur_user);
@@ -76,7 +77,7 @@ public class UserController {
     @RequestMapping(value="/logout")
     public String UserLogout(HttpServletRequest request){
     	String url=request.getHeader("Referer");
-    	//System.out.println("logout===="+url);
+    	System.out.println("logout===="+url);
     	request.getSession().setAttribute("user",null);
     	if(url==null || url.indexOf("user/detail")>0 || url.indexOf("admin")>0)
     		return "forward:/beforeindex";

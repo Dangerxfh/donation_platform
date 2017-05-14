@@ -89,6 +89,8 @@ public class IBaseDaoImpl<T> implements IBaseDao<T>{
 		List<T> tList=null;
 		//鍒涘缓 Criteria
 		Criteria criteria=getSession().createCriteria(t);
+		//去掉重复元素
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		tList=criteria.list();
 		return tList;
 	}

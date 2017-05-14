@@ -24,17 +24,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="<%=basePath%>js/alertJS.js"></script>
     <script type="text/javascript">
      function doUpload() {  //Ajax异步上传图片  
-	     var formData = new FormData($("#uploadForm")[0]);    
-	     $.ajax({    
-	          url:'<%=basePath%>admin/project/uploadimg', 
+	     var formData = new FormData($("#uploadForm")[0]);   
+	     var s=Math.random();
+	     //alert(s);
+	     $.ajax({ 
+	     	    
+	          url:"<%=basePath%>admin/project/uploadimg", 
 	          type: 'POST',    
 	          data:  new FormData($('#uploadForm')[0]),   
-	          async: false,    
+	          async: true,    
 	          cache: false,    
 	          contentType: false,    
 	          processData: false, 
 	          success: function (returndata) {              
-	        		location.reload();
+	        		//location.reload();
+	        		//alert(returndata.PIC);
+	        		 //setTimeout(1000);
+	        		 document.getElementById("showpic").src=returndata.PIC;
 	          },    
 	          error: function (returndata) {    
 	              alert(returndata);    
@@ -113,7 +119,7 @@ $(function(){
 					    
 					     
 	     		       	<div class="imgdiv">
-					       		<img id="showpic" src="${PIC}" >
+					       		<img id="showpic" src="" >
 					       	</div>
 				       		<br>	
 				        </div>

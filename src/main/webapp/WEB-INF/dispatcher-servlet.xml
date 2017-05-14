@@ -27,8 +27,24 @@
    			<mvc:mapping path="/user/**"/>
    			<mvc:mapping path="/admin/**"/>
    			<mvc:exclude-mapping path="/user/*log*/**"/>
-   			<mvc:exclude-mapping path="/admin/project/add"/>
+   			<mvc:exclude-mapping path="/user/*register*/**"/>
    			<bean class="com.xfh.interceptor.LoginInterceptor"></bean>
    		</mvc:interceptor>
    	</mvc:interceptors>
+   	
+   	<bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
    	</beans>

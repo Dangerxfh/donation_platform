@@ -26,12 +26,15 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object arg2) throws Exception {
-			//String url = request.getRequestURI();  
+			String url = request.getRequestURI();  
 	        //URL:login.jsp是公开的;这个demo是除了login.jsp是可以公开访问的，其它的URL都进行拦截控制  
 //	        if(url.indexOf("log")>=0){  
 //	            return true;  
 //	        }  
-	        request.getSession().setAttribute("PIC","");
+			//除了添加活动请求之外的请求都将PIC赋为空串
+			if(!(url.indexOf("admin")>0 && url.indexOf("add")>0))
+				request.getSession().setAttribute("PIC","");
+			
 	        	User user=(User) request.getSession().getAttribute("user");
 	        	if(user!=null)
 	        		return true;

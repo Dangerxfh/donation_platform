@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +34,11 @@ public class AdminController {
 	private AdminProjectService adminProService;
 	//活动列表
 	@RequestMapping(value="/list/{type}/{page}")
-	public String pageProject(@PathVariable("type")String type,@PathVariable("page")Integer page,ModelMap map) throws Exception{
+	public String pageProject(@PathVariable("type")String type,@PathVariable("page")Integer page,@RequestParam(value="addP",required=false)String addP, ModelMap map) throws Exception{
 		Integer cur_page=projectService.getProjectByPage(type,page);
 		map.addAttribute("page",cur_page);
 		map.addAttribute("type",type);
+		map.addAttribute("pro_add",addP);
 		return "admin/project_list";
 	}
 	
@@ -80,8 +81,9 @@ public class AdminController {
 	
 	//删除活动
 	@RequestMapping(value="/delete/{id}")
-	public String deleteProject(@PathVariable Integer id,HttpServletRequest request) throws Exception{
+	public String deleteProject(@PathVariable Integer id,HttpServletRequest request,ModelMap map) throws Exception{
 		String url=request.getHeader("Referer");
+		map.addAttribute("pro_delete",true);
 		adminProService.deleteProject(id);
 		return "redirect:"+url;
 	}
@@ -89,27 +91,30 @@ public class AdminController {
 	//上传图片
 	@RequestMapping(value="/uploadimg",method=RequestMethod.POST)
 	@ResponseBody
-	public void uploadImg(HttpServletRequest request,@RequestParam("id") Integer id,@RequestParam("pic") MultipartFile file) throws InterruptedException, IllegalStateException, IOException{
+	public Map<String,Object> uploadImg(HttpServletRequest request,HttpServletResponse response ,@RequestParam(value="picture",required=false) String picture, @RequestParam("id") Integer id,@RequestParam("pic") MultipartFile file) throws InterruptedException, IllegalStateException, IOException{
 	    
-		 String picPath = null;  
+		 String picPath = null; 
+		 Map<String,Object> map=new HashMap<String, Object>();
          //获取项目的部署路径  
          String path = request.getSession().getServletContext().getRealPath("/");  
+        
          if(id!=null){//更新图片
           	picPath = id+".jpg";
           }	
           else{//上传图片
-          	picPath = "upload.jpg";  
-          	
+          	//picPath = "upload.jpg";  
+          	picPath=file.getOriginalFilename();
           	//将刚刚上传的文件路径存在session中方便页面显示  
           	
-          	request.getSession().setAttribute("PIC","img/"+picPath);
+          request.getSession().setAttribute("PIC","img/"+picPath);
           }
          File targetFile = new File( path+"img",picPath);
          //上传文件
-       
-			file.transferTo(targetFile);
-			Thread.sleep(1000);
-       
+         file.transferTo(targetFile);
+        map.put("PIC","img/"+picPath);
+			
+		//Thread.sleep(1000);
+       return map;
 	}
 	
 	

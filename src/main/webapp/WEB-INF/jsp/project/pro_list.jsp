@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -113,9 +114,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									       <div class="progress-bar progress-bar-success" style="width:${project.pro_CurNumber>=project.pro_TargetNumber?100:project.pro_CurNumber*100/project.pro_TargetNumber}%"></div>
 									</div>
 									<!-- 进度条数字 -->
-									<span class="text-muted number">${project.pro_CurNumber>=project.pro_TargetNumber?100:project.pro_CurNumber*100/project.pro_TargetNumber}%</span> 
+									<span class="text-muted number"><fmt:formatNumber  type="number" value="${project.pro_CurNumber>=project.pro_TargetNumber?100:project.pro_CurNumber*100/project.pro_TargetNumber}" maxFractionDigits="0"/>%</span> 
 								   
-									<a class="btn btn-success btn-sm" href="project/detail/${project.id }">我要参与</a> 
+									<c:if test="${project.pro_Status=='donate'}">	
+										<a class="btn btn-success btn-sm" href="project/detail?pro_id=${project.id }">我要参与</a> 
+								   	</c:if>
+								   	<c:if test="${project.pro_Status=='execute'}">
+								   		<button class="btn btn-danger btn-sm" disabled="disabled">执行中</button>
+								   	</c:if>
+								   	<c:if test="${project.pro_Status=='end'}">
+								   		<button class="btn btn-danger btn-sm" disabled="disabled">已结束</button>
+								   	</c:if>
 								</div>
 							</div>
 				        </div>				        

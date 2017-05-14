@@ -37,7 +37,8 @@ public class AdminProjectServiceImpl implements AdminProjectService{
 			//修改活动图片名
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 			String basePath = request.getSession().getServletContext().getRealPath("/"); 
-			File fileimg=new File(basePath+"img\\upload.jpg");
+			String imgname=(String) request.getSession().getAttribute("PIC");
+			File fileimg=new File(basePath+imgname);
 			projects=projectDao.getByParam(Project.class,"pro_Title",project.getPro_Title());
 			fileimg.renameTo(new File(basePath+"img\\"+projects.get(0).getId()+".jpg"));
 			return true;

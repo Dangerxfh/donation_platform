@@ -26,18 +26,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     $(function(){
     	/* 设置下拉菜单选中项为地址中的活动状态参数 */
         $("#selector").val('${requestScope.type}');
-        
-        if(${requestScope.pro_add=='true'}){
-			$("#noty_message").show();
-			$("#noty_message").text("添加成功");
-			$("#noty_message").fadeIn(300);
-		}
-	        $("#noty_message").removeClass('animated  fadeOutUp');
-	        $("#noty_message").addClass('animated fadeInUp');
-	        setTimeout(function(){
-	            $("#noty_message").removeClass('animated  fadeInUp');
-	            $("#noty_message").addClass('animated fadeOutUp');
-	        },2500)
     });
 	</script>
   </head>  

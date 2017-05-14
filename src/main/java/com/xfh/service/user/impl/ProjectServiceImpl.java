@@ -79,8 +79,10 @@ public class ProjectServiceImpl implements ProjectService {
 			page=1;
 		}
 		else if(page>=page_sum){ //如果页数大于等于总页数，获取活动列表后page_num个 
+			
 			for(int i=0;i<page_num && i<projects.size();i++)
 				pageProjectList.add(projects.get(i));
+			Collections.reverse(pageProjectList);  
 			page=page_sum;
 		}
 		else{  //页数不超过限制，获取page+1页的page_num个活动

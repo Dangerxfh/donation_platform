@@ -15,6 +15,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/bootstrap.min.css">
  	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/nav.css">	
  	<link rel="stylesheet" type="text/css" href="<%=basePath%>css/detail.css">
+ 	<link rel="stylesheet" type="text/css" href="css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/ishare.css">
  	<script src="<%=basePath%>js/jquery-2.2.3.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js" ></script>
   </head>
@@ -152,13 +154,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
       <footer>
   		<div class="layout partner">
-		<div class="hd"><h2>联系我们</h2></div>
-		<div class="bd"></div>
-		<div class="text-center">@版权归徐富豪 ，王小婷，王春晓所有</div>
-	</div>
-  </footer>
-  
+			<div class="hd"><h2>联系我们</h2></div>
+			<div class="bd"></div>
+			<div class="text-center">@版权归徐富豪 ，王小婷，王春晓所有</div>
+		</div>
+ 	 </footer>
+<div class="iShare iShare-32" style="position: absolute;top: 40%;" data-sites="">
+	<a href="#" class="iShare_qq"><i class="iconfont qq">&#xe60f;</i></a>
+	<a href="#" class="iShare_qzone"><i class="iconfont qzone">&#xe610;</i></a>
+	<a href="#" class="iShare_tencent"><i class="iconfont tencent" style="vertical-align: -2px;">&#xe608;</i></a>
+	<a href="#" class="iShare_weibo"><i class="iconfont weibo">&#xe609;</i></a>
+	<a href="#" class="iShare_douban"><i class="iconfont douban" style=" vertical-align: -2px;">&#xe612;</i></a>
+	<a href="#" class="iShare_renren"><i class="iconfont renren">&#xe603;</i></a>
+	<a href="#" class="iShare_youdaonote"><i class="iconfont youdaonote" style="vertical-align: -2px;">&#xe604;</i></a>
+	<a href="#" class="iShare_facebook"><i class="iconfont facebook" style="vertical-align: 1px;">&#xe601;</i></a>
+	<a href="#" class="iShare_twitter"><i class="iconfont twitter" style="vertical-align: 1px;">&#xe60a;</i></a>
+	<a href="#" class="iShare_googleplus"><i class="iconfont googleplus" style="vertical-align: -1px;">&#xe60b;</i></a>
+	<a href="#" class="iShare_linkedin"><i class="iconfont linkedin" style="vertical-align: 2px;">&#xe607;</i></a>
+	<a href="#" class="iShare_pinterest"><i class="iconfont pinterest" style="vertical-align: 0px;">&#xe60c;</i></a>
+	<a href="#" class="iShare_wechat"><i class="iconfont wechat" style="vertical-align: -2px;">&#xe613;</i></a>
+	<a href="#" class="iShare_tumblr"><i class="iconfont tumblr" style="vertical-align: 2px;">&#xe600;</i></a>
+</div>
+ 
 <script>
+var iShare_config = {
+		container:'.iShare',
+		config:{
+			title:'${requestScope.project.pro_Title}',
+			description: '${requestScope.project.pro_Des}',
+			url: 'http://localhost:8080/donation_platform/project/detail/${requestScope.project.id}',
+			
+			// isAbroad: false,
+				//isTitle: true,
+			// initialized: false,
+			WXoptions:{
+				evenType: 'click',
+				isTitleVisibility: true,
+				isTipVisibility: true,
+				tip: '扫描二维码分享',
+				title: 'QR CODE'
+			}
+		}
+	}
+	
 $(function() {
         //想法：滚动条一滚动就掩藏,但是就一直隐藏了，
         $(window).scroll(function() {
@@ -205,41 +243,41 @@ $(function() {
         });
 
     });	
-var area = document.getElementById('box');
-var cont1 = document.getElementById('cont1');
-var cont2 = document.getElementById('cont2');
-var len=cont1.getElementsByTagName('li').length;
-area.scrollTop = 0;
-if(len<=5){
-cont2.innerHTML =null;
-}
-else{
-// 克隆cont1给cont2
-cont2.innerHTML = cont1.innerHTML;
-}
-function myScroll() {
-    if(area.scrollTop >= cont1.scrollHeight) {
-        area.scrollTop = 0;
-    }else {
-        area.scrollTop++;
-    }
-}
-
-var time = 50;
-var interval = setInterval('myScroll()', time);
-
-area.onmouseover = function () {
-    clearInterval(interval);
-};
-
-area.onmouseout = function () {
-    // 继续执行之前的定时器
-    interval = setInterval('myScroll()', time);
-}; 	
+	var area = document.getElementById('box');
+	var cont1 = document.getElementById('cont1');
+	var cont2 = document.getElementById('cont2');
+	var len=cont1.getElementsByTagName('li').length;
+	area.scrollTop = 0;
+	if(len<=5){
+	cont2.innerHTML =null;
+	}
+	else{
+	// 克隆cont1给cont2
+	cont2.innerHTML = cont1.innerHTML;
+	}
+	function myScroll() {
+	    if(area.scrollTop >= cont1.scrollHeight) {
+	        area.scrollTop = 0;
+	    }else {
+	        area.scrollTop++;
+	    }
+	}
+	
+	var time = 50;
+	var interval = setInterval('myScroll()', time);
+	
+	area.onmouseover = function () {
+	    clearInterval(interval);
+	};
+	
+	area.onmouseout = function () {
+	    // 继续执行之前的定时器
+	    interval = setInterval('myScroll()', time);
+	}; 	
 
 
     
 </script>
-
+<script href="javascript:;" type="text/javascript" src="js/iShare_tidy.js"></script> 
   </body>
 </html>
