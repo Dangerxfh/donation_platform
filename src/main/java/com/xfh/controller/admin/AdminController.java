@@ -1,6 +1,9 @@
 package com.xfh.controller.admin;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +43,7 @@ public class AdminController {
 	
 	//跳转到添加活动页面
 	@RequestMapping(value="/add")
-	public String toAdd(@RequestParam(value="addP",required=false) String addP,ModelMap map,HttpSession session){
+	public String toAdd(@RequestParam(value="addP",required=false) String addP,ModelMap map){
 		map.addAttribute("pro_add",addP);
 		return "admin/addproject";
 	}
@@ -86,11 +89,9 @@ public class AdminController {
 	//上传图片
 	@RequestMapping(value="/uploadimg",method=RequestMethod.POST)
 	@ResponseBody
-	public void uploadImg(HttpServletRequest request,@RequestParam("id") Integer id,@RequestParam("pic") MultipartFile file) throws Exception, ServletException{
+	public void uploadImg(HttpServletRequest request,@RequestParam("id") Integer id,@RequestParam("pic") MultipartFile file) throws InterruptedException, IllegalStateException, IOException{
 	    
 		 String picPath = null;  
-		 String fileName = file.getOriginalFilename();
-      
          //获取项目的部署路径  
          String path = request.getSession().getServletContext().getRealPath("/");  
          if(id!=null){//更新图片
@@ -100,18 +101,15 @@ public class AdminController {
           	picPath = "upload.jpg";  
           	
           	//将刚刚上传的文件路径存在session中方便页面显示  
- 	        request.getSession().setAttribute("PIC","img\\"+fileName);
+          	
+          	request.getSession().setAttribute("PIC","img/"+picPath);
           }
          File targetFile = new File( path+"img",picPath);
          //上传文件
-         file.transferTo(targetFile);
-            
-         try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				
-				e.printStackTrace();
-			}
+       
+			file.transferTo(targetFile);
+			Thread.sleep(1000);
+       
 	}
 	
 	

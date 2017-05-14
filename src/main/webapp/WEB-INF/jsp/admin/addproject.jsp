@@ -20,8 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="<%=basePath%>css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
  	<script src="<%=basePath%>js/jquery-2.2.3.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js" ></script>
-    <script src="<%=basePath%>js/project.js" ></script>
-    <script src="<%=basePath%>js/alertJS.js" ></script>
+    <script src="<%=basePath%>js/project.js"></script>
+    <script src="<%=basePath%>js/alertJS.js"></script>
     <script type="text/javascript">
      function doUpload() {  //Ajax异步上传图片  
 	     var formData = new FormData($("#uploadForm")[0]);    
@@ -35,27 +35,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          processData: false, 
 	          success: function (returndata) {              
 	        		location.reload();
-	        		$("#noty_message").show();
-					$("#noty_message").text("添加成功");
-					$("#noty_message").fadeIn(3000);
-					 $("#noty_message").removeClass('animated  fadeInUp');
-			         $("#noty_message").addClass('animated fadeInUp');
-			         $("#noty_message").css({
-				
-				'opacity':'1'
-				
-			});
-			         //alert($("#noty_message").attr('class'));
-			        setTimeout(function(){
-			            $("#noty_message").removeClass('animated  fadeInUp');
-			            $("#noty_message").addClass('animated fadeOutUp');
-			        },2500); 
 	          },    
 	          error: function (returndata) {    
 	              alert(returndata);    
 	          }    
      });    
 }   
+
+
 $(function(){
 		
 		//点击input标签提示信息消失
@@ -96,7 +83,7 @@ $(function(){
 	    	<div class="row">
 	    		<ol class="breadcrumb" style="background: none;">
 				    <li><a href="<%=basePath%>admin/project/list/all/1" class="text-a">首页</a></li>
-				    <li>修改活动</li>
+				    <li>添加活动</li>
 				</ol>
 	    	</div>
 	    	<div class="row rowtop" style="margin-top: -18px;">	
@@ -126,7 +113,7 @@ $(function(){
 					    
 					     
 	     		       	<div class="imgdiv">
-					       		<img id="showpic" src="img/upload.jpg" >
+					       		<img id="showpic" src="${PIC}" >
 					       	</div>
 				       		<br>	
 				        </div>

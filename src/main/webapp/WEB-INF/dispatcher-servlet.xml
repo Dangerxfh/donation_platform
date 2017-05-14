@@ -26,8 +26,9 @@
    		<mvc:interceptor>
    			<mvc:mapping path="/user/**"/>
    			<mvc:mapping path="/admin/**"/>
+   			<mvc:exclude-mapping path="/user/*log*/**"/>
+   			<mvc:exclude-mapping path="/admin/project/add"/>
    			<bean class="com.xfh.interceptor.LoginInterceptor"></bean>
-   			
    		</mvc:interceptor>
    	</mvc:interceptors>
    	</beans>

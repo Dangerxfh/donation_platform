@@ -35,21 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          processData: false, 
 	          success: function (returndata) {              
 	        		location.reload();
-	        		$("#noty_message").show();
-					$("#noty_message").text("修改成功");
-					$("#noty_message").fadeIn(3000);
-					 $("#noty_message").removeClass('animated  fadeInUp');
-			         $("#noty_message").addClass('animated fadeInUp');
-			         $("#noty_message").css({
-				
-				'opacity':'1'
-				
-			});
-			         //alert($("#noty_message").attr('class'));
-			        setTimeout(function(){
-			            $("#noty_message").removeClass('animated  fadeInUp');
-			            $("#noty_message").addClass('animated fadeOutUp');
-			        },2500); 
+	        		
 	          },    
 	          error: function (returndata) {    
 	              alert(returndata);    

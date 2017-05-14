@@ -76,9 +76,9 @@ public class UserController {
     @RequestMapping(value="/logout")
     public String UserLogout(HttpServletRequest request){
     	String url=request.getHeader("Referer");
-    	System.out.println("logout===="+url);
+    	//System.out.println("logout===="+url);
     	request.getSession().setAttribute("user",null);
-    	if(url==null || url.indexOf("user/detail")>0)
+    	if(url==null || url.indexOf("user/detail")>0 || url.indexOf("admin")>0)
     		return "forward:/beforeindex";
     	return "redirect:"+url;
     }

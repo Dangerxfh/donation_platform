@@ -8,7 +8,21 @@ $(document).ready(function(){
 	     var start = new Date(starttime.replace("-", "/").replace("-", "/"));
 	     var end = new Date(endtime.replace("-", "/").replace("-", "/"));
 	     if (end <=start) {
-	         alert('结束日期不能小于开始日期！');
+	    	 $("#noty_message").show();
+				$("#noty_message").text("结束日期不能小于开始日期！");
+				$("#noty_message").css({
+					'color':'#ea6f5a',
+					'border-color':'#ea6f5a',
+					'opacity':'1',		
+				});
+				$("#noty_message").fadeIn(300);
+	    	 $("#noty_message").removeClass('animated  fadeOutUp');
+		        $("#noty_message").addClass('animated fadeInUp');
+		        setTimeout(function(){
+		            $("#noty_message").removeClass('animated  fadeInUp');
+		            $("#noty_message").addClass('animated fadeOutUp');
+		        },2500)
+	       
 	         $('#endTime').val(null);
 	         return false;
 	     }
