@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                        </datalist>
                     </div>
                       <div class="input-group form-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope-o" style="font-size:15px;"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-angle-double-up" style="font-size:15px;"></i></span>
                         <input class="form-control" type="number" name="user_Age" max="130" min="5" placeholder="年龄"  title="年龄应在5-130之间">
                     </div>
                     <div class="input-group form-group">

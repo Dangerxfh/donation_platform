@@ -65,6 +65,13 @@ public class AdminProjectServiceImpl implements AdminProjectService{
 		for(User user : users)
 			user.getProById().remove(project);
 		projectDao.delete(project);
+		
+		//删除活动图片
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		String basePath=request.getServletContext().getRealPath("/");
+		File file=new File(basePath+"img\\"+id+".jpg");
+		System.out.println(basePath+"img\\"+id+".jpg");
+		file.delete();
 	}
 
 }

@@ -2,6 +2,7 @@ package com.xfh.service.user.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +67,11 @@ public class ProjectServiceImpl implements ProjectService {
 			projects=projectDao.getAll(Project.class);
 		else
 			projects=projectDao.getByParam(Project.class,"pro_Status",type);
+		Collections.sort(projects, new Comparator<Project>() {  
+		    public int compare(Project arg0, Project arg1) {  
+		        return arg0.getId().compareTo(arg1.getId()); // 按照id倒序排列  
+		    }  
+		});  
 		if(projects.size()%page_num==0)
 			page_sum=projects.size()/page_num;
 		else
@@ -101,7 +107,7 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Do_Record> getRecords(Project project) throws Exception {
 		List<Do_Record> do_Records=recordDao.getByParam(Do_Record.class,"proByProId",project);
-		System.out.println("dorec==="+do_Records.size());
+		
 		return do_Records;
 	}
 

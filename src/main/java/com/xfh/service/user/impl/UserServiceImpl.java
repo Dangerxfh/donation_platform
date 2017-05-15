@@ -119,6 +119,7 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public void getProjects(User user ) {
 			Set<Project> projects=new HashSet<Project>(projectDao.getWithMany(Project.class,"userByUserId",user.getId()));
+			
 			user.setProById(projects);
 		}
 	

@@ -19,6 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="css/ishare.css">
  	<script src="<%=basePath%>js/jquery-2.2.3.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js" ></script>
+    
   </head>
   <body>
       <c:import url="../top.jsp"/>
@@ -159,8 +160,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="text-center">@版权归徐富豪 ，王小婷，王春晓所有</div>
 		</div>
  	 </footer>
-<div class="iShare iShare-32" style="position: absolute;top: 40%;" data-sites="">
-	<a href="#" class="iShare_qq"><i class="iconfont qq">&#xe60f;</i></a>
+<div id="share" class="iShare iShare-24 " style="position: fixed;left: 90%;top: 25%;display: none;" data-sites="">
 	<a href="#" class="iShare_qzone"><i class="iconfont qzone">&#xe610;</i></a>
 	<a href="#" class="iShare_tencent"><i class="iconfont tencent" style="vertical-align: -2px;">&#xe608;</i></a>
 	<a href="#" class="iShare_weibo"><i class="iconfont weibo">&#xe609;</i></a>
@@ -171,27 +171,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<a href="#" class="iShare_twitter"><i class="iconfont twitter" style="vertical-align: 1px;">&#xe60a;</i></a>
 	<a href="#" class="iShare_googleplus"><i class="iconfont googleplus" style="vertical-align: -1px;">&#xe60b;</i></a>
 	<a href="#" class="iShare_linkedin"><i class="iconfont linkedin" style="vertical-align: 2px;">&#xe607;</i></a>
-	<a href="#" class="iShare_pinterest"><i class="iconfont pinterest" style="vertical-align: 0px;">&#xe60c;</i></a>
 	<a href="#" class="iShare_wechat"><i class="iconfont wechat" style="vertical-align: -2px;">&#xe613;</i></a>
-	<a href="#" class="iShare_tumblr"><i class="iconfont tumblr" style="vertical-align: 2px;">&#xe600;</i></a>
 </div>
- 
-<script>
-var iShare_config = {
+<script href="javascript:;" type="text/javascript">
+	var iShare_config = {
 		container:'.iShare',
 		config:{
-			title:'${requestScope.project.pro_Title}',
-			description: '${requestScope.project.pro_Des}',
-			url: 'http://localhost:8080/donation_platform/project/detail/${requestScope.project.id}',
-			
+			title: '${requestScope.project.pro_Title}',
+			 description: '${requestScope.project.pro_Des}',
+			url: '<%=basePath%>project/detail/${requestScope.project.id}',
 			// isAbroad: false,
-				//isTitle: true,
+			// isTitle: true,
 			// initialized: false,
 			WXoptions:{
 				evenType: 'click',
 				isTitleVisibility: true,
 				isTipVisibility: true,
-				tip: '扫描二维码分享',
+				tip: '这是一段测试文本',
 				title: 'QR CODE'
 			}
 		}
@@ -231,16 +227,12 @@ $(function() {
         $('#myTooltip1').click(function(){
             $('#mypopover').popover("show");
         });
-     $('#mypopover').popover({
-            /*title:"我是弹出框的标题",*/
-            placement:"left",
-            trigger:"focus",
-            html:true,
-            /*字符串拼接双引号里面套单引号，单引号里套双引号*/
-            content:"<ul class='social'><li><a><i class='social-icon-sprite social-icon-weibo'></i><span>分享到微博</span></a></li><li><a><i class='social-icon-sprite social-icon-weixin'></i><span>分享到微信</span></a></li><li><a><i class='social-icon-sprite social-icon-picture'></i><span>下载长微博图片</span></a></li><li><a><i class='social-icon-sprite social-icon-zone'></i><span>分享到QQ空间</span></a></li><li><a><i class='social-icon-sprite social-icon-twitter'></i><span>分享到Twitter</span></a></li><li><a><i class='social-icon-sprite social-icon-facebook'></i><span>分享到Facebook</span></a></li><li><a><i class='social-icon-sprite social-icon-google'></i><span>分享到Google+</span></a></li><li><a><i class='social-icon-sprite social-icon-douban'></i><span>分享到豆瓣</span></a></li></ul>",
-            animation:true,
-            container:"body",
-        });
+     $('#mypopover').click(function(){
+     	$('#share').toggle(800);
+     
+     });
+          
+     
 
     });	
 	var area = document.getElementById('box');
@@ -274,9 +266,7 @@ $(function() {
 	    // 继续执行之前的定时器
 	    interval = setInterval('myScroll()', time);
 	}; 	
-
-
-    
+ 
 </script>
 <script href="javascript:;" type="text/javascript" src="js/iShare_tidy.js"></script> 
   </body>

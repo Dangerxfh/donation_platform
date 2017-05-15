@@ -5,10 +5,13 @@ body{
 }
 .text-a{
 	color: black;
+	font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+	font-weight: bold;
+    line-height: 30px;
 }
 .text-a:hover{
-    text-decoration:none;
-	color: #35b306;
+ text-decoration: underline;
+ color: black;
 }
 .text-green{
 	color: #438513;

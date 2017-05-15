@@ -83,7 +83,7 @@ $(function(){
 </style>
 
     
-  <body onbeforeunload="return myFunction()">
+  <body>
 	
 	<c:import url="admin_top.jsp"/>
 	 <div id="noty_message" style="display: none;">

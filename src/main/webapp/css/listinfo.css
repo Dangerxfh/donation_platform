@@ -74,6 +74,7 @@
 .leftmedia{
 	float:left;
 	width: 65%;
+	font-size: 13px;
 }
 .rightmedia{
 	width: 35%;
@@ -102,4 +103,10 @@
 	width: 15%;
 	line-height:10px;
 	font-size: 8px;
+}
+.text-sponsor{
+	 margin-left: 135px;
+}
+.descript{
+	height: 50px;
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -71,27 +72,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								
 								<!-- 活动标题 -->
 					        	<span class="media-heading h4"><a class="text-a" href="project/detail/${project.id }">${project.pro_Title }</a></span>
-					     		<div class="descript small">
+					     		<div class="descript">
 					            	<span class="text-muted">项目简介&nbsp;|&nbsp;</span>
 					            	<!-- 项目简介 -->
-					        		<span>${project.pro_Des }</span>
+					        		<span id="pro_des">${fn:substring(project.pro_Des,0,80) }。。。。。。</span>
 								</div>
 								<br>
-								<div class="small">									
+								<div class="meta">									
 										<span class="text-muted">筹款目标&nbsp;|&nbsp;</span>
 										<span>${project.pro_TargetNumber }元</span>
-										<br>
-										<span class="text-muted">筹款时间&nbsp;|&nbsp;</span>
-										<span>${project.pro_StartTime }</span>
-										至
-										<span>${project.pro_EndTime }</span>
-										<br>
-										<span class="text-muted">执 行 方&nbsp;|&nbsp;</span>
+																	
+										<span class="text-muted text-sponsor">执 行 方&nbsp;|&nbsp;</span>
 										<span>${project.pro_Sponsor}</span> 
 								</div>
 							</div>
 							<div class="rightmedia">
-								<div class="small">
+								<div class="">
 								
 									<p>		
 										<!-- 项目状态 -->							
@@ -117,10 +113,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<span class="text-muted number"><fmt:formatNumber  type="number" value="${project.pro_CurNumber>=project.pro_TargetNumber?100:project.pro_CurNumber*100/project.pro_TargetNumber}" maxFractionDigits="0"/>%</span> 
 								   
 									<c:if test="${project.pro_Status=='donate'}">	
-										<a class="btn btn-success btn-sm" href="project/detail?pro_id=${project.id }">我要参与</a> 
+										<a class="btn btn-success btn-sm" href="project/detail/${project.id }">我要参与</a> 
 								   	</c:if>
 								   	<c:if test="${project.pro_Status=='execute'}">
-								   		<button class="btn btn-danger btn-sm" disabled="disabled">执行中</button>
+								   		<button class="btn btn-info btn-sm" disabled="disabled">执行中</button>
 								   	</c:if>
 								   	<c:if test="${project.pro_Status=='end'}">
 								   		<button class="btn btn-danger btn-sm" disabled="disabled">已结束</button>
