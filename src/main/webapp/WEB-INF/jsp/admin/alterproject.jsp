@@ -29,13 +29,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          url:'<%=basePath%>admin/project/uploadimg', 
 	          type: 'POST',    
 	          data:  new FormData($('#uploadForm')[0]),   
-	          async: false,    
+	          async: true,    
 	          cache: false,    
 	          contentType: false,    
 	          processData: false, 
 	          success: function (returndata) {              
-	        		location.reload();
-	        		
+	        		//location.reload();
+	        		 document.getElementById("showpic").src=returndata.PIC;
 	          },    
 	          error: function (returndata) {    
 	              alert(returndata);    
@@ -123,6 +123,7 @@ $(function(){
 					    
 					     
 	     		       	<div class="imgdiv">
+	     		       		
 					       		<img id="showpic" src="img/${requestScope.project.id }.jpg" >
 					       	</div>
 				       		<br>	
@@ -165,8 +166,15 @@ $(function(){
  	<footer>
   		<div class="layout partner">
 			<div class="hd"><h2>联系我们</h2></div>
-			<div class="bd"></div>
-			<div class="text-center">@版权归XXX所有</div>
+			<div class="style123">
+			<p>公益项目咨询：gongyi@qq.com|公益项目合作：gongyi@qq.com</p>
+			<p>主办：徐富豪(20142203780) ，王小婷(20142203777)，王春晓(20142203648)</p>
+			<p>班级：1403,1404</p>
+			<p><a>意见反馈</a>|<a>网友投诉</a></p>
+			
+			</div>
+			<div class="bd"></div><br>
+			<div class="text-center">@版权归徐富豪 ，王小婷，王春晓所有</div>
 	    </div>
     </footer>
   

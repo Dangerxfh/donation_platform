@@ -111,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<!--模态框 -->
 										<div class="modal"  id="${project.id}">
 
-										        <div class="modal-dialog">
+										        <div class="modal-dialog  modal-sm">
 										
 										            <div class="modal-content">
 										
@@ -151,8 +151,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<footer>
   		<div class="layout partner">
 			<div class="hd"><h2>联系我们</h2></div>
-			<div class="bd"></div>
-			<div class="text-center">@版权归XXX所有</div>
+			<div class="style123">
+			<p>公益项目咨询：gongyi@qq.com|公益项目合作：gongyi@qq.com</p>
+			<p>主办：徐富豪(20142203780) ，王小婷(20142203777)，王春晓(20142203648)</p>
+			<p>班级：1403,1404</p>
+			<p><a>意见反馈</a>|<a>网友投诉</a></p>
+			
+			</div>
+			<div class="bd"></div><br>
+			<div class="text-center">@版权归徐富豪 ，王小婷，王春晓所有</div>
 	    </div>
     </footer>
   

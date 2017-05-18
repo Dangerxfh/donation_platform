@@ -20,8 +20,9 @@
 		<property name="user" value="${jdbc.user}"></property>
 		<property name="password" value="${jdbc.password}"></property>
 		<property name="driverClass" value="${jdbc.driverClass}"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/donation_platform?useUnicode=true&amp;characterEncoding=UTF-8"></property>
-
+		<!-- <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/donation_platform?useUnicode=true&amp;characterEncoding=UTF-8"></property> -->
+		
+		<property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property> 
 		<property name="initialPoolSize" value="${jdbc.initPoolSize}"></property>
 		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
 	</bean>
@@ -31,7 +32,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
@@ -45,9 +46,7 @@
 			</list>
 		</property>
 	</bean>
-	
-	
-	
+
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -55,16 +54,4 @@
 	<!-- 开启事物注解 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
-	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager">
-		<tx:attributes>
-			<tx:method name="*"/>
-		</tx:attributes>
-	</tx:advice>
-
-	3. 配置事务切点, 并把切点和事务属性关联起来
-	<aop:config>
-		<aop:pointcut expression="execution(* com.xfh.service.*.*(..))" 
-			id="txPointcut"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
-	</aop:config> -->
 </beans>

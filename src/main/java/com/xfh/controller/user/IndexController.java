@@ -1,6 +1,7 @@
 package com.xfh.controller.user;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.xfh.model.Do_Record;
 import com.xfh.model.Project;
 import com.xfh.service.user.ProjectService;
 
@@ -23,7 +25,11 @@ public class IndexController {
 	@RequestMapping(value="/beforeindex")
 	public String beforeIndex(ModelMap map,HttpSession session){
 		List<Project> projects=projectSevice.getAllProject();
-		Collections.reverse(projects);
+		Collections.sort(projects, new Comparator<Project>() {  
+		    public int compare(Project arg0, Project arg1) {  
+		        return arg1.getId().compareTo(arg0.getId()); // 按照id排列  
+		    }  
+		}); 
 		Integer total_money=projectSevice.getAllMoney(projects);
 		Integer total_people=projectSevice.getAllPeople(projects);
 		

@@ -2,7 +2,7 @@
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
+         version="3.1" id="WebApp_1494895946773">
 	<welcome-file-list>
 		<welcome-file>
 			welcome.jsp
@@ -15,21 +15,21 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
   </listener>  
   
-   <context-param>  
+   <context-param id="ParamValue_1494896133936">  
     <param-name>contextConfigLocation</param-name>  
     <param-value>classpath:applicationContext.xml</param-value>  
   </context-param>
   
-  <servlet>
+  <servlet id="Servlet_1494896133910">
     <servlet-name>dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
   </servlet>
-  <servlet-mapping>
+  <servlet-mapping id="ServletMapping_1494896133890">
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   
-   <filter>
+   <filter id="Filter_1494896133927">
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
     <init-param>
@@ -48,11 +48,11 @@
   
   <error-page>
   	<error-code>404</error-code>
-  	<location>/404.html</location>
+  	<location>/404.jsp</location>
   </error-page>
   
   <error-page>
   	<error-code>500</error-code>
-  	<location>/500.html</location>
+  	<location>/500.jsp</location>
   </error-page>
 </web-app>

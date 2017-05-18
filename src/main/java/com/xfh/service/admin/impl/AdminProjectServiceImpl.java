@@ -52,6 +52,17 @@ public class AdminProjectServiceImpl implements AdminProjectService{
 		List<Project> projects=projectDao.getByParam(Project.class,"pro_Title",project.getPro_Title());
 		if(projects.isEmpty() || projects.get(0).getId()==project.getId()){	
 			projectDao.update(project);
+			
+			//修改活动图片名
+			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+			String basePath = request.getSession().getServletContext().getRealPath("/"); 
+			String imgname=(String) request.getSession().getAttribute("PIC");
+			File oldfile=new File(basePath+"img\\"+project.getId()+".jpg");
+			oldfile.delete();
+			System.out.println("oldFile"+basePath+"img\\"+project.getId()+".jpg");
+			File fileimg=new File(basePath+imgname);
+			//projects=projectDao.getByParam(Project.class,"pro_Title",project.getPro_Title());
+			fileimg.renameTo(new File(basePath+"img\\"+project.getId()+".jpg"));
 			return true;
 		}
 		return false;
@@ -70,7 +81,6 @@ public class AdminProjectServiceImpl implements AdminProjectService{
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		String basePath=request.getServletContext().getRealPath("/");
 		File file=new File(basePath+"img\\"+id+".jpg");
-		System.out.println(basePath+"img\\"+id+".jpg");
 		file.delete();
 	}
 

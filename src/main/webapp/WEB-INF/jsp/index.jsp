@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -85,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        	<div class="media-body">
 				        		<!-- 活动描述 -->
 				            	<div class="descript">
-					            	${project.pro_Des}
+					            	${fn:substring(project.pro_Des,0,80) }。。。。。。
 								</div>
 								<br>
 								<p class="text-muted small">
@@ -94,15 +95,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</p>
 								<p class="text-right text-muted lead1">
 									<i class="fa fa-commenting-o fa-fw"></i>
-									<a class="text-muted" href="project/detail?pro_id=${project.id }">详情</a>
+									<a class="text-muted" href="project/detail/${project.id }">详情</a>
 								</p>
 								
 					        </div>
 	    				</div>		
 	    				</c:forEach>
-					<!-- 重复重复 -->
-					
-					<!-- 重复重复 -->					
+								
 					</div>
 					<div class="col-xs-4">
 					<div class="list2">
@@ -137,8 +136,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="bd"></div>
 		<div class="style123">
 		<p>公益项目咨询：gongyi@qq.com|公益项目合作：gongyi@qq.com</p>
-		<p>主办：徐富豪 ，王小婷，王春晓</p>
+		<p>主办：徐富豪(20142203780) ，王小婷(20142203777)，王春晓(20142203648)</p>
+		<p>班级：1403,1404</p>
 		<p><a>意见反馈</a>|<a>网友投诉</a></p>
+		
 		</div>
 		<div class="bd"></div><br>
 		<div class="text-center">@版权归徐富豪 ，王小婷，王春晓所有</div>

@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!-- 滚动信息列表 -->
 					<div class="gundong" id="layer1">
 						<div class="title">
-					   		<span class="gundongtitle h2">信息跟踪</span>	
+					   		<span class="gundongtitle h2">捐款记录</span>	
 					   	</div>
 					   	  <div id="box" class="maquee">
 						    <ul id="cont1" class="list-group">
@@ -156,11 +156,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <footer>
   		<div class="layout partner">
 			<div class="hd"><h2>联系我们</h2></div>
-			<div class="bd"></div>
+			<div class="style123">
+			<p>公益项目咨询：gongyi@qq.com|公益项目合作：gongyi@qq.com</p>
+			<p>主办：徐富豪(20142203780) ，王小婷(20142203777)，王春晓(20142203648)</p>
+			<p>班级：1403,1404</p>
+			<p><a>意见反馈</a>|<a>网友投诉</a></p>
+			
+			</div>
+			<div class="bd"></div><br>
 			<div class="text-center">@版权归徐富豪 ，王小婷，王春晓所有</div>
 		</div>
  	 </footer>
-<div id="share" class="iShare iShare-24 " style="position: fixed;left: 90%;top: 25%;display: none;" data-sites="">
+<div id="share" class="iShare iShare-24" style="position:absolute;left: 90%;top: 25%;display: none;" data-sites="">
 	<a href="#" class="iShare_qzone"><i class="iconfont qzone">&#xe610;</i></a>
 	<a href="#" class="iShare_tencent"><i class="iconfont tencent" style="vertical-align: -2px;">&#xe608;</i></a>
 	<a href="#" class="iShare_weibo"><i class="iconfont weibo">&#xe609;</i></a>
@@ -171,7 +178,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<a href="#" class="iShare_twitter"><i class="iconfont twitter" style="vertical-align: 1px;">&#xe60a;</i></a>
 	<a href="#" class="iShare_googleplus"><i class="iconfont googleplus" style="vertical-align: -1px;">&#xe60b;</i></a>
 	<a href="#" class="iShare_linkedin"><i class="iconfont linkedin" style="vertical-align: 2px;">&#xe607;</i></a>
+	<a href="#" class="iShare_pinterest"><i class="iconfont pinterest" style="vertical-align: 0px;">&#xe60c;</i></a>
 	<a href="#" class="iShare_wechat"><i class="iconfont wechat" style="vertical-align: -2px;">&#xe613;</i></a>
+	<a href="#" class="iShare_tumblr"><i class="iconfont tumblr" style="vertical-align: 2px;">&#xe600;</i></a>
 </div>
 <script href="javascript:;" type="text/javascript">
 	var iShare_config = {
@@ -179,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		config:{
 			title: '${requestScope.project.pro_Title}',
 			 description: '${requestScope.project.pro_Des}',
-			url: '<%=basePath%>project/detail/${requestScope.project.id}',
+			url: '127.0.0.1:8080/donation_platform/project/detail/${requestScope.project.id}',
 			// isAbroad: false,
 			// isTitle: true,
 			// initialized: false,
@@ -187,8 +196,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				evenType: 'click',
 				isTitleVisibility: true,
 				isTipVisibility: true,
-				tip: '这是一段测试文本',
-				title: 'QR CODE'
+				tip: '扫描二维码分享活动',
+				//title: 'QR CODE'
 			}
 		}
 	}
@@ -220,7 +229,7 @@ $(function() {
 
         });
         $('#myTooltip1').tooltip({
-            title:"分享文章",
+            title:"分享活动",
             placement:'left',
             trigger:"hover"
         });

@@ -32,8 +32,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 //	            return true;  
 //	        }  
 			//除了添加活动请求之外的请求都将PIC赋为空串
-			if(!(url.indexOf("admin")>0 && url.indexOf("add")>0))
-				request.getSession().setAttribute("PIC","");
+//			if(!(url.indexOf("admin")>0 && url.indexOf("add")>0))
+//				request.getSession().setAttribute("PIC","");
 			
 	        	User user=(User) request.getSession().getAttribute("user");
 	        	if(user!=null)

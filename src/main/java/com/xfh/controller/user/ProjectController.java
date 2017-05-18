@@ -35,7 +35,7 @@ public class ProjectController {
 	public String getProject (@PathVariable Integer id,ModelMap map) throws Exception{
 		Project project=projectService.getProjectByparam("id",id);
 		List<Do_Record> do_Records=projectService.getRecords(project);
-		//System.out.println("record==="+do_Records.size());
+
 		map.addAttribute("project", project);
 		map.addAttribute("do_Records", do_Records);
 		return "project/pro_detail";

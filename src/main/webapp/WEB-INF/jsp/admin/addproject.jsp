@@ -25,7 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
      function doUpload() {  //Ajax异步上传图片  
 	     var formData = new FormData($("#uploadForm")[0]);   
-	     var s=Math.random();
 	     //alert(s);
 	     $.ajax({ 
 	     	    
@@ -159,8 +158,14 @@ $(function(){
  	<footer>
   		<div class="layout partner">
 			<div class="hd"><h2>联系我们</h2></div>
-			<div class="bd"></div>
-			<div class="text-center">@版权归XXX所有</div>
+			<div class="style123">
+			<p style="text-align:left;">公益项目咨询：gongyi@qq.com|公益项目合作：gongyi@qq.com</p>
+			<p style="text-align:left;">主办：徐富豪(20142203780) ，王小婷(20142203777)，王春晓(20142203648)</p>
+			<p style="text-align:left;">班级：1403,1404</p>
+			<p style="text-align:left;"><a>意见反馈</a>|<a>网友投诉</a></p>	
+			</div>
+			<div class="bd"></div><br>
+			<div class="text-center">@版权归徐富豪 ，王小婷，王春晓所有</div>
 	    </div>
     </footer>
   

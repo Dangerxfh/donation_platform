@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 <script type="text/javascript">
     	$(function(){
     		//如果用户不为空
-    		if(${sessionScope.user!=null}){
+    		if(${user!=null}){
     			//将用户名显示在页面
     			$("#login").text('${sessionScope.user.user_Name}');
     			

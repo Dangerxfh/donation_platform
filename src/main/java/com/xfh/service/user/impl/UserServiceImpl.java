@@ -109,10 +109,6 @@ public class UserServiceImpl implements UserService {
 			String do_Time=format.format(new Date());
 			record.setDo_Time(do_Time);
 			recordDao.save(record);
-			
-			
-			//userDao.update(user);
-
 		}
 
 		//获取用户参与的活动集合，并赋值

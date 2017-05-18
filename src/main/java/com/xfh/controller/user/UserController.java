@@ -3,7 +3,9 @@ package com.xfh.controller.user;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,11 +35,12 @@ public class UserController {
 	
 	@RequestMapping(value="/tologin")
 	public String toLogin(HttpServletRequest request){
-		String url=request.getHeader("Referer");
+		String url=(String) request.getAttribute("url");
+		if(url==null)
+		url=request.getHeader("Referer");
 		request.getSession().setAttribute("url", url);
-		if(url.indexOf("tologin")>0)
+		if(url.indexOf("tologin")>0 || url.indexOf("logout")>0)
 			return "redirect:/beforeindex";
-		System.out.println("tologin==="+url);
 		return "user/user_login";
 	}
 	
@@ -52,6 +55,12 @@ public class UserController {
 		User cur_user=userService.userLogin(user);
     	if(cur_user!=null){
     		session.setAttribute("user",cur_user);
+    		
+    		Map<String,String> pro_status=new HashMap<String,String>();
+    		pro_status.put("donate","正在募捐");    //将状态存到map中
+    		pro_status.put("execute","正在执行");
+    		pro_status.put("end","已结束");
+    		session.setAttribute("pro_status",pro_status);
     		if(cur_user.getUser_Name().equals("admin"))
     			return "redirect:/admin/project/list/all/1";
     		if(url==null || url.indexOf("admin")>0)
@@ -65,7 +74,6 @@ public class UserController {
     //注册
     @RequestMapping(value="/register",method=RequestMethod.POST)
     public String UserRegister(@ModelAttribute User user) throws Exception{
-    	//System.out.println(user.getUser_Name());
     	if(userService.userRegister(user)==true){
     		return "/user/user_login";    		
     	}
@@ -77,7 +85,7 @@ public class UserController {
     @RequestMapping(value="/logout")
     public String UserLogout(HttpServletRequest request){
     	String url=request.getHeader("Referer");
-    	System.out.println("logout===="+url);
+    	request.setAttribute("url",url);
     	request.getSession().setAttribute("user",null);
     	if(url==null || url.indexOf("user/detail")>0 || url.indexOf("admin")>0)
     		return "forward:/beforeindex";
@@ -129,17 +137,15 @@ public class UserController {
     }
     
     //修改个人信息
-    @RequestMapping(value="/update")
+    @RequestMapping(value="/detail/update")
     public String userUpdate(@ModelAttribute User user,ModelMap map,HttpSession session) throws Exception{
     	User sessionUser=(User) session.getAttribute("user");
     	user.setProById(sessionUser.getProById());
     	user.setRecById(sessionUser.getRecById());
-    	System.out.println(userService.userUpdate(user)+"==========");
     	if(userService.userUpdate(user)==true)
-    		session.setAttribute("user", user);
+    		session.setAttribute("user",user);
     	else
     		map.addAttribute("msg_update",false);
-    	System.out.println(((User)session.getAttribute("user")).getUser_Name()+"********");
     		return "user/user_detail_myinfo";
     }
     

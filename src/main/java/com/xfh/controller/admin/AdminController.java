@@ -2,6 +2,7 @@ package com.xfh.controller.admin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -73,9 +75,9 @@ public class AdminController {
 	@RequestMapping(value="/updateP",method=RequestMethod.POST)
 	public String updateProject(@ModelAttribute Project project) throws Exception{
 		if(adminProService.updateProject(project)==false)
-			return "forward:/admin/project/update/"+project.getId()+"?update=false";
+			return "redirect:/admin/project/update/"+project.getId()+"?update=false";
 		else
-		return "forward:/admin/project/update/"+project.getId()+"?update=true";
+			return "redirect:/admin/project/update/"+project.getId()+"?update=true";
 		
 	}
 	
@@ -91,29 +93,27 @@ public class AdminController {
 	//上传图片
 	@RequestMapping(value="/uploadimg",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> uploadImg(HttpServletRequest request,HttpServletResponse response ,@RequestParam(value="picture",required=false) String picture, @RequestParam("id") Integer id,@RequestParam("pic") MultipartFile file) throws InterruptedException, IllegalStateException, IOException{
+	public Map<String,Object> uploadImg(HttpServletRequest request,
+			HttpServletResponse response ,
+			@RequestParam("pic") MultipartFile file) throws InterruptedException, IllegalStateException, IOException{
 	    
 		 String picPath = null; 
 		 Map<String,Object> map=new HashMap<String, Object>();
          //获取项目的部署路径  
          String path = request.getSession().getServletContext().getRealPath("/");  
         
-         if(id!=null){//更新图片
-          	picPath = id+".jpg";
-          }	
-          else{//上传图片
-          	//picPath = "upload.jpg";  
+       
           	picPath=file.getOriginalFilename();
-          	//将刚刚上传的文件路径存在session中方便页面显示  
-          	
-          request.getSession().setAttribute("PIC","img/"+picPath);
-          }
+         
          File targetFile = new File( path+"img",picPath);
+         if(targetFile.exists() ){  //如果图片已存在，生成长度为20的随机字符串作为临时图片名
+        	 picPath=RandomStringUtils.randomAlphanumeric(20)+".jpg";
+        	 targetFile=new File(path+"img\\",picPath);
+         }
+         request.getSession().setAttribute("PIC","img/"+picPath);
          //上传文件
          file.transferTo(targetFile);
         map.put("PIC","img/"+picPath);
-			
-		//Thread.sleep(1000);
        return map;
 	}
 	

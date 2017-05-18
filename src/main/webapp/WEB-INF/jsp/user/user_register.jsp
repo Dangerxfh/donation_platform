@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 	    <div class="row sign">
 		    <h4 class="title">
-			    <a  href="<%=basePath%>/jsp/user/user_login.jsp">登录</a>
+			    <a  href="<%=basePath%>user/tologin">登录</a>
 			    <b>.</b>
 			    <a class="active">注册</a>
 		    </h4>

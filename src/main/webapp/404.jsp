@@ -1,6 +1,15 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<<html>
+
+
 <head>
+	 <base href="<%=basePath%>">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -43,12 +52,12 @@
   
   
     <!--Core JavaScript file  -->
-    <script src="js/jquery-1.10.2.js"></script>
+    <script src="<%=basePath %>js/jquery-1.10.2.js"></script>
     <!--bootstrap JavaScript file  -->
-    <script src="js/bootstrap.js"></script>
+    <script src="<%=basePath %>js/bootstrap.js"></script>
      <!--Count Number JavaScript file  -->
-    <script src="js/countUp.js"></script>
+    <script src="<%=basePath %>js/countUp.js"></script>
        <!--Custom JavaScript file  -->
-    <script src="js/custom_404.js"></script>
+    <script src="<%=basePath %>js/custom_404.js"></script>
 </body>
 </html>
